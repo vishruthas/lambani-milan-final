@@ -1,0 +1,461 @@
+/* ---------- Base page ---------- */
+.page_8 {
+  padding: 20px;
+  padding-top: 95px;
+  background: #faf9f6;
+  font-family: 'Poppins', sans-serif;
+  color: #222;
+  
+}
+.headermy {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 6.8rem !important;
+  padding: 12px 20px;
+  border-bottom: 1px solid #ddd;
+  background: linear-gradient(135deg, #f2e9db);
+}
+
+
+.header-centermy {
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex:1;
+  margin-left:-84px;
+  
+}
+
+.logo{
+  width:90px;
+  height:60px;
+  object-fit:contain;
+  display:block;
+}
+
+.title {
+  font-family: "UnifrakturMaguntia", cursive;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #a50d0d;
+}
+
+
+/* ---------- Photo viewer ---------- */
+.viewer_8 {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-top: -95px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.viewer-image_8 {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.left-arrow_8,
+.right-arrow_8 {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  user-select: none;
+  color:#7a0020;
+  padding: 6px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  border: none;
+  cursor: pointer;
+}
+
+.arrow-disabled_8,
+.left-arrow_8[disabled],
+.right-arrow_8[disabled] {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+.left-arrow_8 { left: 10px; }
+.right-arrow_8 { right: 10px; }
+
+.edit-icon-top_8 {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  cursor: pointer;
+  color: darkred; 
+  padding: 6px;
+  border-radius: 6px;
+ font-size: 30px;
+}
+
+/* ---------- Display photo ---------- */
+.display-wrapper_8 {
+  position: relative;
+  margin-top: -60px;
+  width: 160px;
+  height: 160px;
+}
+
+.display-photo_8 {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.dp-edit_8 {
+  position: absolute;
+  bottom: 9px;
+  right: 10px;
+  cursor: pointer;
+  color: darkred;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 30px;
+}
+
+
+.verified-badge {
+  display: flex;
+  align-items: center;
+}
+
+.badge-svg {
+  width: 90px;
+  height: 28px;
+  display: block;
+}
+
+/* Name + badge row */
+.name-with-badge1 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+  position: relative;
+  font: italic;
+  margin-top: -90px;  
+  margin-left: 175px;
+  margin-bottom: 70px;
+}
+
+.verified-badge1 {
+  display: flex;
+  align-items: center;
+}
+
+.badge-svg {
+  width: 90px;
+  height: 28px;
+  display: block;
+  overflow: visible;
+}
+
+.profile-name1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #a50d0d;
+  margin: 0;
+}
+
+/* ---------- Cards ---------- */
+.card_8 {
+  background: #fff;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+/* header and edit icon color */
+.card-header_8 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.card-header_8 h3 {
+  margin: 0;
+  color: darkred;
+  font-size: 24px;
+  text-align: center;
+}
+.card-edit-icon_8{
+  display: flex;
+  align-items: flex-end;
+}
+
+.card-header_8 svg,
+.card-edit-icon_8 {
+  color: darkred;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+/* ---------- Info rows ---------- */
+.card_8 .row_8 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.card_8 .label_8 {
+  width: 180px;
+  font-weight: 700;
+  color: darkred;
+  font-size: 15px;
+}
+
+.card_8 .value_8 {
+  color: #555;
+  margin-left: auto;
+  text-align: right;
+  min-width: 120px;
+  font-size: 15px;
+}
+
+
+/* ---------- Sections ---------- */
+.section_8 {
+  margin-top: 25px;
+}
+
+.section-label_8 {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  color: #7a0020
+}
+
+.section-heading_8 {
+  margin-bottom: 10px;
+}
+
+.kul-group_8 {
+  margin-bottom: 12px;
+}
+
+.kul-title_8 {
+  font-weight: 700;
+  color: darkred;
+}
+
+.kul-content_8 {
+  margin-left: 10px;
+  color: #555;
+}
+
+.disabled-text_8 {
+  color: #888;
+}
+
+/* ---------- Accordion ---------- */
+.accordion-box_8 {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.accordion-header_8 {
+  background: #f9f9f9;
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.accordion-body_8 {
+  padding: 12px;
+}
+
+.search-input_8 {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* ---------- Pref gothra & blocks ---------- */
+.checkbox-row_8 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.pref-gothra-wrapper_8 {
+  margin-top: 10px;
+}
+
+.pref-gothra-heading_8 {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.kul-block_8 {
+  margin-bottom: 10px;
+}
+
+.kul-name_8 {
+  font-weight: 600;
+  color: darkred;
+}
+
+.gothra-list_8 {
+  margin-left: 10px;
+  color: #555;
+}
+
+.all-gothra-text_8 {
+  margin-left: 10px;
+  color: #888;
+}
+
+@media (max-width: 720px) {
+  .form-grid_8 {
+    grid-template-columns: 1fr;
+  }
+
+  .card_8 .row_8 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card_8 .label_8 {
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .card_8 .value_8 {
+    width: 100%;
+    text-align: left;
+    margin-left: 0;
+  }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+
+  .headermy {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 6rem !important;
+  padding: 6px 12px;  
+  border-bottom: 1px solid #ddd;
+  background: linear-gradient(135deg, #f2e9db);
+}
+
+.header-centermy {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px !important;
+  flex: 1;
+  margin-left: -12px !important;
+
+}
+
+.logo {
+  width: 65px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+}
+
+.title {
+  font-family: "UnifrakturMaguntia", cursive;
+  font-size: 22px;
+  letter-spacing: 0.4px;
+  color: #a50d0d;
+}
+}
+
+
+ @media (max-width: 600px) {
+
+  .headermy {
+    width: 100%;
+    height: 4.4rem !important;
+    padding: 8px 12px !important;
+    margin-top: 0 !important;
+    position: fixed;
+    top: -1px;
+    left: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f2e9db);
+  }
+
+  .header-centermy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px !important;
+    margin-left: -26px !important;
+    width: 100%;
+    margin-top: 2px;
+  }
+
+  .logo {
+    width: 58px !important;
+    height: 38px !important;
+    object-fit: contain;
+  }
+
+  .title {
+    font-size: 20px !important;
+    letter-spacing: 0.4px !important;
+  }
+
+  .page_8 {
+    padding-top: 75px !important;
+  }
+
+  .viewer_8 {
+    position: relative;
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+    padding: 0;
+    min-height: unset;
+    height: auto;
+    margin-top: 0 !important;
+  }
+
+  .viewer-image_8 {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+}

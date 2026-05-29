@@ -1,0 +1,503 @@
+/* Base styles (updated: reduced box width and font sizes) */
+
+.da-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 40px;
+  min-height: 70vh;
+ font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+
+.da-box {
+  width: 320px;              
+  padding: 24px;             
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid #b30000;
+}
+
+/* Header */
+.da-title {
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  margin-top: 12px;
+  padding-bottom: 2px;
+  margin-bottom: 20px;
+}
+
+.da-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.da-title h3 {
+  margin: 0;
+  font-size: 20px; ;          
+  color: var(--accent);
+}
+
+
+.da-title p {
+  color: #080808;
+  line-height: 1.5;
+  font-size: 14px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.da-desc {
+  font-size: 14px;
+  color: #080808;          
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.da-desc1 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);          
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.da-password-field {
+  position: relative;
+  width: 50%;
+ 
+}
+
+.da-input {
+  width: 100%;
+  height: 42px;             
+  margin-bottom: 10px;
+  padding: 0 40px 0 12px;
+  border-radius: 8px;
+  border: 1px solid #b30000;
+  box-sizing: border-box;
+  font-size: 13px;           
+}
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-60%);  
+}
+
+.da-btn {
+  width: auto;
+  max-width: 210px;
+  padding: 0 24px;
+  height: 44px;
+  background: linear-gradient(135deg, #992a22, #d63b2f);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.da-error {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #d32f2f;
+  text-align: center;     
+  width: 100%;            
+}
+.da-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+}
+
+.da-popup {
+  background: #fff;
+  padding: 18px;             
+  border-radius: 12px;
+  text-align: center;
+  min-width: 240px;          
+  box-sizing: border-box;
+}
+
+.da-okBtn {
+  margin-top: 8px;
+  padding: 8px 14px;
+  border: none;
+  background: linear-gradient(135deg, #992a22, #d63b2f);
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;          
+}
+
+/* Card */
+.da-card {
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;    
+  margin-top: 0; 
+}
+.da-card {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e8eeec;
+  border-radius: 10px;
+  margin: 16px 0;
+  padding: 16px 20px;
+  box-sizing: border-box;
+}
+
+
+/* Items */
+.da-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: none;
+}
+
+.da-item:last-child {
+  border-bottom: none;
+}
+.da-item:not(:last-child) {
+  border-bottom: 1px solid #eee;  
+}
+
+.da-item span {
+  font-size: 20px;
+}
+
+.da-item p {
+  font-size: 13px;
+  color: #888;
+  margin: 2px 0 0;
+}
+
+/* Checkbox */
+.da-checkbox {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Radio */
+.da-radio {
+  display: block;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.da-radio.active {
+  background: #fef2f2;
+  border: 1px solid #fcd5d5;
+  border-radius: 6px;
+}
+
+
+/* -------------------------
+   Responsive overrides
+   (tablet and mobile)
+   ------------------------- */
+
+/* Large tablets and small laptops (up to 1024px) */
+@media (max-width: 1024px) {
+  .da-wrapper {
+    height: 28vh;
+    padding: 10px;
+  }
+
+  .da-box {
+    width: 380px;            
+    max-width: 92%;
+    padding: 22px;
+    border-radius: 14px;
+  }
+
+  .da-title {
+    margin-bottom: 10px;
+  }
+  .da-title h3 {
+    font-size: 18px;
+  }
+  .da-title p {
+    font-size: 13px;
+  }
+
+  .da-desc {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .da-desc1 {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);          
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+  .da-input {
+    height: 44px;
+    font-size: 14px;
+    padding: 0 12px;
+  }
+
+  .da-btn {
+    height: 46px;
+    font-size: 15px;
+    width: 210px;
+    margin: 0 auto;
+  }
+
+  .da-popup {
+    min-width: 280px;
+    padding: 16px;
+  }
+}
+
+/* Tablet portrait and large phones (up to 768px) */
+@media (max-width: 760px) {
+  .da-wrapper {
+    height: auto;
+    padding: 16px 12px;
+    align-items: flex-start;
+  }
+
+  .da-box {
+    width: 92%;
+    max-width: 360px;
+    padding: 20px;
+    border-radius: 14px;
+    text-align: left;
+  }
+
+  .da-title {
+    
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  .da-title h3 {
+    font-size: 16px;
+  }
+  .da-title p {
+    font-size: 12px;
+  }
+
+  .da-desc {
+    font-size: 12px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  .da-input {
+    height: 42px;
+    font-size: 13px;
+    padding: 0 10px;
+  }
+
+  .da-btn {
+    height: 44px;
+    font-size: 15px;
+    max-width: 200px !important;
+    margin: 0 auto;
+  }
+
+  .da-error {
+    font-size: 12px;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .da-popup {
+    min-width: 220px;
+    padding: 14px;
+  }
+
+  .da-okBtn {
+    min-height: 42px;
+  }
+}
+
+/* Large mobile (up to 640px) */
+@media (max-width: 640px) {
+  .da-wrapper {
+    height: auto;
+    padding: 12px 10px;
+  }
+
+  .da-box {
+    width: 100%;
+    max-width: 320px;        
+    padding: 16px;
+    border-radius: 12px;
+    text-align: left;
+  }
+
+  .da-title {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .da-desc {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .da-input {
+    height: 40px;
+    font-size: 13px;
+    padding: 0 10px;
+  }
+
+  .da-btn {
+    height: 42px;
+    font-size: 14px;
+    max-width: 150px;
+    margin: 0 auto;
+  }
+  .da-password-field {
+  position: relative;
+  width: 90% !important;
+ 
+}
+
+  .da-error {
+    font-size: 11px;
+  }
+
+  .da-popup {
+    min-width: 200px;
+    padding: 12px;
+  }
+}
+
+/* Medium mobile (up to 480px) */
+@media (max-width: 480px) {
+  .da-wrapper {
+    height: auto;
+    padding: 10px 8px;
+  }
+
+  .da-box {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .da-title {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .da-desc {
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+  .da-desc1 {
+  font-size: 10px;
+  color: var(--accent);          
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+  .da-input {
+    height: 38px;
+    font-size: 12px;
+    padding: 0 8px;
+  }
+
+  .da-btn {
+    height: 40px;
+    font-size: 14px;
+    max-width: 150px !important;
+    margin: 0 auto;
+  }
+
+  .da-error {
+    font-size: 11px;
+  }
+
+  .da-popup {
+    min-width: 180px;
+    padding: 10px;
+  }
+
+  .da-box > * { margin-top: 0; margin-bottom: 8px; }
+  .da-title { margin-bottom: 6px; }
+}
+
+/* Small mobile (up to 360px) */
+@media (max-width: 360px) {
+  .da-wrapper {
+    padding: 8px 6px;
+  }
+
+  .da-box {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .da-title {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .da-desc {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+
+  .da-input {
+    height: 36px;
+    font-size: 12px;
+    padding: 0 8px;
+  }
+
+  .da-btn {
+    height: 38px;
+    font-size: 13px;
+    max-width: 150px !important;
+    margin: 0 auto;
+  }
+
+  .da-error {
+    font-size: 10px;
+  }
+
+  .da-popup {
+    min-width: 150px;
+    padding: 8px;
+  }
+}
+
+/* Accessibility / touch targets */
+@media (max-width: 640px) {
+  .da-btn, .da-okBtn {
+    min-height: 40px;
+    min-width: 44px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .da-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 95vh;
+    box-sizing: border-box;
+  }
+
+}

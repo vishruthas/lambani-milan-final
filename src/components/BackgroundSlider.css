@@ -1,0 +1,49 @@
+/* container sits behind everything */
+.bg-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -10;
+  pointer-events: none;
+  background-color: #000; 
+}
+
+/* each image  */
+.bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 1.5s ease-in-out, transform 15s ease-in-out;
+  will-change: opacity, transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* active image fades in and slowly scales up */
+.bg-image.active {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* subtle overlay */
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-image {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+

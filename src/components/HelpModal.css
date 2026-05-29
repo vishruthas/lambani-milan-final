@@ -1,0 +1,204 @@
+/* Base styles (kept and extended for responsiveness) */
+.hm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Card */
+.hm-card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(2,6,23,0.3);
+  font-family: 'Poppins', sans-serif;
+  /* make card height responsive and avoid overflow outside viewport */
+  max-height: calc(100vh - 40px);
+}
+
+/* Header */
+.hm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(2,6,23,0.06);
+  font-size: 18px;
+  color: var(--accent);
+  font-weight: 600;
+  gap: 12px;
+}
+
+/* Close button */
+.hm-close {
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--accent);
+  line-height: 1;
+  background: transparent;
+  border: none;
+  padding: 6px;
+  border-radius: 6px;
+}
+.hm-close:focus {
+  outline: 2px solid rgba(122,15,15,0.12);
+  outline-offset: 2px;
+}
+
+/* Content */
+.hm-content {
+  padding: 16px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #374151;
+  overflow: auto; /* allow scrolling inside card if content is long */
+}
+
+/* Emphasis and links */
+.hm-content strong {
+  color: var(--accent);
+}
+.hm-email {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.hm-email:hover {
+  text-decoration: underline;
+}
+
+/* Ensure good touch targets */
+.hm-card button,
+.hm-card a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* -------------------------
+   Responsive overrides
+   ------------------------- */
+
+/* Large tablets and small laptops */
+@media (max-width: 1024px) {
+  .hm-card {
+    max-width: 420px;
+    margin: 0 12px;
+    border-radius: 10px;
+    max-height: calc(100vh - 36px);
+  }
+  .hm-header { padding: 10px 14px; font-size: 17px; }
+  .hm-content { padding: 14px; font-size: 15px; }
+  .hm-close { font-size: 22px; padding: 6px; }
+}
+
+/* Tablet portrait and large phones */
+@media (max-width: 768px) {
+  .hm-overlay { padding: 16px; }
+  .hm-card {
+    max-width: 380px;
+    max-height: calc(100vh - 32px);
+    border-radius: 10px;
+  }
+  .hm-header {
+    padding: 10px 12px;
+    font-size: 16px;
+  }
+  .hm-content {
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .hm-close { font-size: 20px; padding: 6px; }
+}
+
+/* Large mobile */
+@media (max-width: 640px) {
+  .hm-overlay { padding: 12px; }
+  .hm-card {
+    max-width: 340px;
+    max-height: calc(100vh - 28px);
+    border-radius: 10px;
+  }
+  .hm-header {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+  .hm-content {
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: left; /* left align for easier reading on narrow screens */
+  }
+  .hm-content p { margin: 0 0 10px 0; }
+  .hm-close { font-size: 20px; padding: 6px; }
+}
+
+/* Medium mobile */
+@media (max-width: 480px) {
+  .hm-overlay { padding: 10px; }
+  .hm-card {
+    max-width: 320px;
+    max-height: calc(100vh - 24px);
+    border-radius: 8px;
+  }
+  .hm-header {
+    padding: 8px 10px;
+    font-size: 15px;
+  }
+  .hm-content {
+    padding: 10px;
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: left;
+  }
+  .hm-close { font-size: 18px; padding: 6px; }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+  .hm-overlay { padding: 8px; }
+  .hm-card {
+    max-width: 300px;
+    max-height: calc(100vh - 20px);
+    border-radius: 8px;
+  }
+  .hm-header {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  .hm-content {
+    padding: 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: left;
+  }
+  .hm-close { font-size: 18px; padding: 6px; }
+}
+
+/* Accessibility: ensure keyboard focus and minimum tappable sizes */
+.hm-close,
+.hm-card a,
+.hm-card button {
+  min-height: 40px;
+  min-width: 40px;
+}
+
+/* If content is long, ensure smooth internal scrolling */
+.hm-content::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.hm-content::-webkit-scrollbar-thumb {
+  background: rgba(2,6,23,0.08);
+  border-radius: 6px;
+}

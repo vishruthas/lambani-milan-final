@@ -1,0 +1,61 @@
+.pm-top{
+  display:flex;
+  align-items:center;
+  margin-bottom:18px;
+  padding-left:2px;
+   
+
+}
+
+
+.pm-wrapper{
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eee;
+   font-family: 'Poppins', sans-serif;
+}
+
+.pm-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 18px;
+  border-bottom:1px solid #eee;
+  cursor:pointer;
+  transition:0.2s ease;
+  font-family: 'Poppins', sans-serif;
+  background:#fff;
+}
+
+.pm-item:last-child{
+  border-bottom:none;
+}
+
+.pm-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.pm-left span{
+  font-size:16px;
+  color:#444;
+  font-weight:500;
+}
+
+.pm-arrow{
+  font-size:24px;
+  color:#999;
+  line-height:1;
+}
+
+.pm-wrapper{
+  width:100%;
+  margin:-20px auto 0;
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid #eee;
+}

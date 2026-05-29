@@ -1,0 +1,850 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root{
+  --accent: #c53a50;
+  --home-body-bg: #faf9f6;
+}
+
+/* Page container */
+.allprofiles-container {
+  height: 100vh;
+  overflow: hidden;
+  background: var(--home-body-bg);
+  color: #222;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  padding-bottom: 80px;
+}
+
+.headerall {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid #ddd;
+  background: linear-gradient(135deg, #f2e9db);
+}
+
+
+.header-centerall {
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex:1;
+  margin-left:-82px;
+  margin-top: 1px;
+  
+}
+
+.logo{
+  width:90px;
+  height:60px;
+  object-fit:contain;
+  display:block;
+}
+
+.title {
+  font-family: "UnifrakturMaguntia", cursive;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #a50d0d;
+}
+
+
+
+/* Toggle wrapper */
+.allprofiles-toggle-wrapper {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 320px;
+  height: 44px;
+  user-select: none;
+  cursor: pointer;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.slider {
+  position: absolute;
+  inset: 0;
+  background-color: #dcdcdc;
+  border-radius: 28px;
+  transition: background-color 200ms ease;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+.slider .labels1 {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  pointer-events: none;
+}
+.label-left1 { color: #fff; }
+.label-right1 { color: #b73229; }
+.slider .knob1 {
+  position: absolute;
+  top: 4px;
+  left: 3px;
+  width: calc(50% - 8px);
+  height: calc(100% - 8px);
+  background: var(--accent);
+  border-radius: 24px;
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  z-index: 2;
+  overflow: hidden;
+}
+.slider .knob1::before,
+.slider .knob1::after {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 180ms ease;
+  white-space: nowrap;
+}
+.slider .knob1::before { content: "Recently Joined"; opacity: 1; }
+.slider .knob1::after  { content: "Matches Found"; opacity: 0; }
+.switch input:checked + .slider { background-color: #f1f1f2; }
+.switch input:checked + .slider .knob1 { transform: translateX(100%); }
+.switch input:checked + .slider .knob1::before { opacity: 0; }
+.switch input:checked + .slider .knob1::after  { opacity: 1; }
+.switch input:checked + .slider .labels1 .label-left1 { color: #b73229; }
+.switch input:checked + .slider .labels1 .label-right1 { color: #fff; }
+.switch input:not(:checked) + .slider .labels1 .label-left1 { color: #fff; }
+.switch input:not(:checked) + .slider .labels1 .label-right1 { color: #b73229; }
+
+/* Content area */
+.allprofiles-content {
+  height: calc(100vh - 64px - 76px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+  padding-top: 8px;
+  margin-top: 0;
+  box-sizing: border-box;
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) rgba(0,0,0,0.06);
+}
+
+/* Card grid — one card per row */
+.allprofiles-card-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+/* Card container */
+.profile-card,
+.allprofile-card1 {
+  background: #f2e9db;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  border: 1px solid rgba(171, 35, 35, 0.04);
+}
+.profile-card:hover,
+.allprofile-card1:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  border-color: var(--accent);
+}
+
+/* Image wrapper */
+.profile-image-wrapper,
+.card-image-wrapper,
+.carousel-wrapper1 {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  max-height: 300px;
+  overflow: hidden;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* main image */
+.carousel-image1 {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
+  width: 20%;
+  position: relative;
+  z-index: 10;
+  max-height: 245px;
+}
+
+/* Action buttons sizing (wider) 
+.allprofile-actions .btn-primary,
+.allprofile-actions .btn-message,
+.allprofile-actions .btn-unsend  {
+  min-width: 140px;
+  width: 100%;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.allprofile-actions .btn-accept,
+.allprofile-actions .btn-reject {
+  max-width: 130px;
+  width: 100%;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  flex: 0 0 auto;
+} */
+
+
+
+/* Keep flex behavior */
+
+.allprofile-actions {
+  
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 20rem;
+  margin-left: 40%;
+  margin-bottom: 15px;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+
+.allprofile-actions .btn-primary,
+.allprofile-actions .btn-unsend,
+.allprofile-actions .btn-message,
+.allprofile-actions .btn-accept,
+.allprofile-actions .btn-reject {
+
+  width: 230px;
+  height: 44px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex: 0 0 220px;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-unsend {
+  width: 230px;
+  height: 44px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-unsend {
+  margin-bottom: -18px !important;
+}
+.btn-primary {
+  background: #e65100;
+  color: #fff;
+}
+
+.btn-unsend {
+  background: linear-gradient(135deg, #d63b2f, #e65);
+  color: #fff;
+}
+
+.btn-disabled,
+.btn-primary[disabled] {
+  flex: 1 1 auto;
+  padding: 12px;
+  background: #ccc;
+  border: none;
+  border-radius: 10px;
+  cursor: default;
+  opacity: 0.9;
+}
+
+
+.btn-accept {
+  flex: 1 1 auto;
+  padding: 12px;
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+.btn-reject {
+  flex: 1 1 auto;
+  padding: 12px;
+  background: #c62828;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+.btn-message {
+  flex: 1 1 auto;
+  padding: 12px;
+  background: linear-gradient(135deg, #992a22, #d63b2f);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary,
+.btn-unsend,
+.btn-message,
+.btn-accept,
+.btn-reject{
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+.btn-primary:hover,
+.btn-unsend:hover,
+.btn-message:hover,
+.btn-accept:hover,
+.btn-reject:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+/* Small card specifics */
+.allprofile-card {
+  padding-bottom: 12px;
+  min-height: 180px;
+  text-align: center;
+}
+
+/* Circular avatar */
+.allprofile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 12px auto 8px auto;
+  border: 2px solid #eee;
+}
+
+/* Name and details */
+.allprofile-name,
+.profile-name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+  margin-top: 10px;
+  color: #b73229;
+  padding: 0 14px;
+}
+.allprofile-detail,
+.profile-detail {
+  font-size: 13px;
+  color: #666;
+  padding: 0 14px 5px 14px;
+}
+
+/* Declined status */
+.status-declined {
+  color: #c62828;
+  font-weight: 700;
+  padding: 6px 8px;
+  text-align: center;
+}
+
+/* Loading and center notes */
+.loading-note { color: #777; padding: 6px 0; text-align: center; }
+.center-note { text-align: center; padding: 24px; color: #666; }
+
+/* Accessibility helpers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .switch { width: 260px; height: 40px; }
+  .slider .knob1 { width: calc(50% - 8px); font-size: 13px; }
+  .slider .knob1::before { content: "Recently Joined"; }
+  .slider .knob1::after  { content: "Matches Found"; }
+  .carousel-wrapper { height: 180px; }
+  .carousel-arrow { width: 34px; height: 34px; font-size: 18px; }
+  .photo-count { padding: 4px 8px; font-size: 12px; }
+  .carousel-image.reduced-width { max-width: 160px; }
+}
+@media (max-width: 360px) {
+  .carousel-arrow.left { left: 6px; }
+  .carousel-arrow.right { right: 6px; }
+  .photo-count { top: 6px; right: 6px; padding: 3px 6px; font-size: 11px; }
+}
+/* ---------- Tablet (<=1024px) ---------- */
+@media (max-width: 1024px) {
+
+  .headerall { 
+  width: 100%;
+  display: flex;
+  height: 6.8rem !important;
+  align-items: center;
+  justify-content: space-between;
+  height: 6rem !important;
+  padding: 6px 12px;   
+  border-bottom: 1px solid #ddd;
+  background: linear-gradient(135deg, #f2e9db);
+   }
+
+  .logo { width: 65px; height: 44px; }
+  .title { font-size: 22px; letter-spacing: 0.4px;}
+
+  .header-centerall { 
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex: 1;
+  margin-left: -14px !important;
+  margin-top: 1px;
+     }
+
+
+  /* Topbar / toggle sizing kept as before */
+  
+  .allprofiles-container .allprofiles-toggle-wrapper { margin-top: 0.5rem; padding: 10px; }
+  .allprofiles-container .switch { width: 300px; height: 42px; }
+
+  /* Ensure toggle labels and knob text stay on a single line */
+  .allprofiles-container .slider .labels1,
+  .allprofiles-container .slider .labels1 > * {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1;
+  }
+  .allprofiles-container .slider .knob1,
+  .allprofiles-container .slider .knob1::before,
+  .allprofiles-container .slider .knob1::after {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Slightly reduced label sizes for tablet so text fits */
+  .allprofiles-container .slider .labels1 { font-size: 13px; }
+  .allprofiles-container .slider .knob1 { font-size: 13px; }
+  .allprofiles-container .slider .knob1::before,
+  .allprofiles-container .slider .knob1::after { font-size: 12px; padding: 0 6px; }
+
+  /* Content area */
+  .allprofiles-container .allprofiles-content {
+    padding: 18px;
+    height: calc(100vh - 56px - 72px);
+    margin-top: -10px !important;
+  }
+
+  /* Cards */
+  .allprofiles-container .profile-card,
+  .allprofiles-container .allprofile-card1 {
+    border-radius: 10px;
+    margin-bottom: 18px;
+  }
+
+  /* Tablet image layout: preserve side-image proportions (no full-bleed) */
+  .allprofiles-container .profile-image-wrapper,
+  .allprofiles-container .card-image-wrapper,
+  .allprofiles-container .carousel-wrapper1 {
+    height: 34vh;
+    max-height: 260px;
+  }
+  .allprofiles-container .carousel-image1 {
+    width: 20%;
+    height: 100%;
+    max-height: 260px !important;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .allprofiles-container .profile-image-wrapper img,
+  .allprofiles-container .card-image-wrapper img,
+  .allprofiles-container .carousel-wrapper1 img {
+    width: auto;
+    max-width: 60%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Text sizing */
+  .allprofiles-container .allprofile-name,
+  .allprofiles-container .profile-name { font-size: 15px; }
+  .allprofiles-container .allprofile-detail,
+  .allprofiles-container .profile-detail { font-size: 13px; }
+
+  /* Actions: center and allow wrapping */
+  .allprofiles-container .allprofile-actions {
+    width: auto;
+    margin-left: 4px !important;
+    justify-content: center;
+  }
+  .allprofile-actions .btn-primary,
+  .allprofile-actions .btn-message,
+  .allprofile-actions .btn-unsend,
+  .allprofile-actions .btn-accept,
+  .allprofile-actions .btn-reject {
+  width: 170px;
+  height: 42px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  flex: 0 0 170px;
+}
+
+}
+
+/* ---------- Mobile (<=760px) ---------- */
+@media (max-width: 760px) {
+  /* Topbar */
+  .headerall { padding: 8px 10px; height: 4.4rem !important; }
+  .logo { width: 60px; height: 38px; }
+  .title { font-size: 18px; letter-spacing: 0.4px; }
+  .header-centerall { gap: 10px; margin-left: -25px !important; margin-top: 1px !important; }
+  
+  
+  /* Move the toggle slightly lower so it doesn't sit too close to the topbar */
+  .allprofiles-container .allprofiles-toggle-wrapper {
+    margin-top: 0.5rem;
+    padding: 8px;
+  }
+  .allprofiles-container .switch { width: 240px; height: 40px; }
+
+  /* Toggle labels and knob: force single-line and slightly smaller on mobile */
+  .allprofiles-container .slider .labels1,
+  .allprofiles-container .slider .labels1 > * {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .allprofiles-container .slider .labels1 { font-size: 12px; padding: 0 8px; }
+  .allprofiles-container .slider .knob1 { font-size: 12px; padding-left: 6px; padding-right: 6px; }
+  .allprofiles-container .slider .knob1::before,
+  .allprofiles-container .slider .knob1::after {
+    font-size: 11px;
+    padding: 0 6px;
+  }
+
+  /* Content area */
+  .allprofiles-container .allprofiles-content {
+    padding: 14px;
+    height: calc(100vh - 56px - 64px);
+  }
+
+  /* Cards: compact spacing */
+  .allprofiles-container .profile-card,
+  .allprofiles-container .allprofile-card1 {
+    padding: 10px;
+    border-radius: 10px;
+    min-height: auto;
+  }
+
+  
+
+  /* Slightly increase wrapper height on very narrow screens to reduce crop */
+  @media (max-width: 420px) {
+    .allprofiles-container .profile-image-wrapper,
+    .allprofiles-container .card-image-wrapper,
+    .allprofiles-container .carousel-wrapper1 {
+      height: 36vh;
+      max-height: 240px;
+    }
+  }
+
+  /* Avatar and text */
+  .allprofiles-container .allprofile-img {
+    width: 80px;
+    height: 80px;
+    margin: 10px auto 6px auto;
+  }
+  .allprofiles-container .allprofile-name,
+  .allprofiles-container .profile-name {
+    font-size: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .allprofiles-container .allprofile-detail,
+  .allprofiles-container .profile-detail {
+    font-size: 12px;
+    padding: 0 12px 6px 12px;
+  }
+
+  /* Actions: center, wrap, and reduce button widths */
+  .allprofiles-container .allprofile-actions {
+    width: 100%;
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .allprofiles-container .allprofile-actions .btn-primary,
+  .allprofiles-container .allprofile-actions .btn-accept,
+  .allprofiles-container .allprofile-actions .btn-reject,
+  .allprofiles-container .allprofile-actions .btn-message, 
+  .allprofiles-container .allprofile-actions .btn-unsend {
+    max-width: 190px;
+    padding: 8px 8px;
+    font-size: 13px;
+  }
+
+
+  .allprofiles-container .btn-primary,
+  .allprofiles-container .btn-message,
+  allprofiles-container .btn-unsend { padding: 10px; }
+
+}
+
+/* ---------- Narrow phones (<=480px) ---------- */
+@media (max-width: 460px) {
+  .allprofiles-container .messages-topbar { height: 3.4rem; }
+  .allprofiles-container .topbar-title { font-size: 14px; }
+  .allprofiles-container .switch { width: 200px; height: 36px; }
+
+  /* Keep toggle labels single-line and slightly smaller */
+  .allprofiles-container .slider .labels1 { font-size: 11px; }
+  .allprofiles-container .slider .knob1 { font-size: 11px; }
+
+  .allprofiles-container .profile-image-wrapper,
+  .allprofiles-container .card-image-wrapper,
+  .allprofiles-container .carousel-wrapper1 {
+    height: 28vh;
+    max-height: 180px;
+  }
+  .allprofiles-container .carousel-image1,
+  .allprofiles-container .profile-image-wrapper img,
+  .allprofiles-container .card-image-wrapper img,
+  .allprofiles-container .carousel-wrapper1 img {
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .allprofiles-container .allprofile-img { width: 64px; height: 64px; }
+  .allprofiles-container .allprofile-name,
+  .allprofiles-container .profile-name { font-size: 13px; }
+  .allprofiles-container .allprofile-detail,
+  .allprofiles-container .profile-detail { font-size: 11.5px; }
+  
+  
+  .allprofiles-container .allprofile-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 14px;
+  margin-bottom: 12px;
+  margin-left: 2px !important;
+}
+
+.allprofiles-container .allprofile-actions .btn-primary,
+.allprofiles-container .allprofile-actions .btn-accept,
+.allprofiles-container .allprofile-actions .btn-reject,
+.allprofiles-container .allprofile-actions .btn-message,
+.allprofiles-container .allprofile-actions .btn-unsend {
+  width: 140px;
+  max-width: 140px;
+  height: 35px;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+}
+}
+
+/* ---------- Very small phones (<=360px) ---------- */
+@media (max-width: 390px) {
+  .allprofiles-container .messages-topbar .topbar-title { font-size: 14px; }
+  .allprofiles-container .profile-image-wrapper,
+  .allprofiles-container .card-image-wrapper,
+  .allprofiles-container .carousel-wrapper1 {
+    height: 22vh;
+    max-height: 140px;
+  }
+  .allprofiles-container .allprofile-img { width: 56px; height: 56px; }
+  .allprofiles-container .allprofile-name,
+  .allprofiles-container .profile-name { font-size: 12px; }
+  .allprofiles-container .allprofile-detail,
+  .allprofiles-container .profile-detail { font-size: 10.5px; }
+  .allprofiles-container .allprofile-actions .btn-primary,
+  .allprofiles-container .allprofile-actions .btn-accept,
+  .allprofiles-container .allprofile-actions .btn-reject,
+  .allprofiles-container .allprofile-actions .btn-message,
+  .allprofiles-container .allprofile-actions .btn-unsend {
+    max-width: 120px;
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+  
+
+}
+
+@media (max-width: 760px) {
+
+  .allprofiles-container .switch {
+    width: 250px;
+    height: 40px;
+  }
+
+  .allprofiles-container .slider {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+  }
+
+  .allprofiles-container .slider .labels1 {
+    padding: 0 14px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .allprofiles-container .slider .knob1 {
+    width: calc(50% - 6px);
+    height: calc(100% - 6px);
+    top: 3px;
+    left: 3px;
+    border-radius: 22px;
+    font-size: 11px;
+  }
+
+  .allprofiles-container .slider .knob1::before,
+  .allprofiles-container .slider .knob1::after {
+    width: 100%;
+    text-align: center;
+    font-size: 11px;
+    padding: 0 4px;
+  }
+
+  .switch input:checked + .slider .knob1 {
+    transform: translateX(calc(100% + 1px));
+  }
+}
+
+   @media (min-width: 768px) and (max-width: 1024px) {
+  .allprofiles-container .allprofile-actions .btn-primary,
+  .allprofiles-container .allprofile-actions .btn-accept,
+  .allprofiles-container .allprofile-actions .btn-reject,
+  .allprofiles-container .allprofile-actions .btn-message, 
+  .allprofiles-container .allprofile-actions .btn-unsend {
+    max-width: 190px;
+    padding: 8px 8px;
+    font-size: 16px;
+  }
+} 
+@media (min-width: 1512px){
+
+  .allprofiles-container .allprofile-actions .btn-primary,
+  .allprofiles-container .allprofile-actions .btn-accept,
+  .allprofiles-container .allprofile-actions .btn-reject,
+  .allprofiles-container .allprofile-actions .btn-message, 
+  .allprofiles-container .allprofile-actions .btn-unsend {
+    max-width: 250px !important;
+    width: 100%;
+    padding: 8px 8px;
+    font-size: 16px;
+   
+  }
+ .allprofile-actions {
+  margin-left : 41%;
+ }
+ .allprofiles-container .carousel-image1 {
+    width: 20%;
+    height: 100%;
+    max-height: 300px !important;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1500px) {
+  .allprofiles-container .carousel-image1 {
+    max-height: 300px !important;
+  }
+}
+
+@media (min-width : 1000px) and (max-width: 1025px) {
+  .headerall {
+    height: 6.8rem !important;
+  }
+
+  .header-centerall { margin-left: -85px !important; margin-top: -1px;}
+}

@@ -1,0 +1,52 @@
+.mam-wrapper{  
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  font-family: 'Poppins', sans-serif;
+  
+}
+
+.mam-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 16px;
+  border-bottom:1px solid #eee;
+  cursor:pointer;
+  transition:0.2s ease;
+  background:#fff;
+   font-family: 'Poppins', sans-serif;
+}
+
+.mam-item:last-child{
+  border-bottom:none;
+}
+
+.mam-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.mam-left span{
+  font-size:16px;
+  color:#444;
+  font-weight:500;
+}
+
+.mam-arrow{
+  font-size:24px;
+  color:#999;
+  line-height:1;
+}
+
+.mam-top{
+  display:flex;
+  align-items:center;
+  margin-top:-52px;
+  margin-bottom:18px;
+  padding-left:2px;
+}
+
+

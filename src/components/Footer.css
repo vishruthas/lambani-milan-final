@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+ .footer {
+   font-family: 'Poppins', sans-serif;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+   width: 100%;
+  display: flex;
+  border-top: 1px solid #ddd;
+  background: #fff;
+  z-index: 1000;
+} 
+
+.footer-item {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #666;
+  transition: color 0.3s ease, transform 0.3s ease;
+  position: relative; 
+}
+
+.footer-item:hover {
+  color: #c53a50;
+  transform: scale(1.05);
+}
+
+.footer-item.active {
+  color: #c53a50;
+}
+
+/* glowing circle behind the icon */
+.footer-item.active::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #c53a50;
+  opacity: 0.3;
+  box-shadow: 0 0 12px #c53a50;
+  z-index: -1;
+}
+
+.footer-text {
+  font-size: 12px;
+}
+
+.icon-with-badge {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: #c53a50;
+  color: #fff;
+  border-radius: 50%;
+  min-width: 16px;
+  height: 16px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.badge:hover {
+  transform: scale(1.1);
+}
+
+.footer {
+  padding-bottom: env(safe-area-inset-bottom, 8px);
+}
+
+.footer-item {
+  min-height: 48px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.footer-item:focus {
+  outline: 3px solid rgba(197,58,80,0.14);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.badge {
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-item,
+  .footer-item:hover,
+  .badge,
+  .footer-item.active::before {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .footer {
+    height: 56px;
+  }
+  .footer-item { gap: 2px; }
+  .footer-text { font-size: 11px; }
+}
+
+@media (forced-colors: active) {
+  .footer { background: Window; border-top-color: GrayText; }
+  .footer-item { color: WindowText; }
+  .footer-item.active::before { background: Highlight; box-shadow: none; opacity: 0.18; }
+  .badge { background: Highlight; color: Window; }
+}
+
+.footer { z-index: 1200; }
+
+.footer-item.active {
+  transform: translateY(-2px) scale(1.02);
+}

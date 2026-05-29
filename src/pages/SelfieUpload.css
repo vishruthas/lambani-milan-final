@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --accent: #d63b2f;
+  --accent-dark: #992a22;
+  --card-bg: rgba(255,255,255,0.06);
+  --card-border: rgba(255,255,255,0.08);
+  --muted: #e9e9e9;
+  --error: #ff6b6b;
+  --radius: 14px;
+  --shadow: 0 18px 40px rgba(0,0,0,0.28);
+}
+
+body:has(.selfie-card) {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.no-scroll-page {
+  overflow: hidden;
+  height: 100vh;
+}
+
+body:has(.selfie-card) .page-content,
+.no-scroll-page .page-content {
+  max-height: 100vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+}
+
+.page-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  background: transparent;
+  font-family: 'Poppins', sans-serif;
+}
+
+.page-content::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url('../assets/bg4.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  filter: blur(2px) brightness(0.7);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.selfie-card1 {
+  width: 100%;
+  max-width: 480px;
+  transform: translateY(-100px);
+  padding: 20px;
+  border-radius: var(--radius);
+  background: #fff9fa;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px) saturate(120%);
+  color: var(--muted);
+  text-align: center;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  margin-top: 30px;
+}
+
+/* Title */
+.selfie-title {
+  font-size: 25px;
+  margin: 0 0 16px;
+  color: #7a0020;
+  font-weight: 700;
+}
+
+/* Video / preview */
+.selfie-video {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #000;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  border: 2px solid #642b2b;
+}
+
+.selfie-video:focus {
+  outline: 3px solid rgba(197,58,80,0.12);
+  outline-offset: 4px;
+}
+
+/* Error text */
+.selfie-error {
+  color: var(--error);
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Actions row */
+.selfie-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.selfie-actions.single {
+  justify-content: center;
+}
+
+.btn-primary,
+.btn-secondary {
+  width: 140px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  border: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #992a22, #d63b2f);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(197,58,80,0.18);
+  margin-top: 20px;
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-primary:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(197,58,80,0.22);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #992a22, #d63b2f);
+  color: #fbf5f5;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  margin-top: 17px;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.14);
+}
+
+/* ── TABLET (601px – 900px) ──────────────────────────────────────── */
+@media (min-width: 601px) and (max-width: 900px) {
+  .selfie-card {
+    max-width: 420px;
+    padding: 24px;
+    transform: translateY(-60px);
+  }
+
+  .selfie-title {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .selfie-video {
+    width: 240px;
+    height: 240px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 130px;
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .selfie-error {
+    font-size: 13px;
+  }
+}
+
+/* ── MOBILE (≤ 600px) ────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .selfie-card1 {
+    max-width: 100%;
+    padding: 20px 16px;
+    transform: translateY(-40px);
+    border-radius: 12px;
+  }
+
+  .selfie-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .selfie-video {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+  }
+
+  .selfie-actions {
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 120px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .btn-primary {
+    margin-top: 16px;
+  }
+
+  .btn-secondary {
+    margin-top: 13px;
+  }
+
+  .selfie-error {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+}
+
+/* ── LARGE MOBILE (≤ 480px) ──────────────────────────────────────── */
+@media (max-width: 480px) {
+  .selfie-card1 {
+    padding: 18px 14px;
+    transform: translateY(-30px);
+    margin-top: -50px !important;
+  }
+
+  .selfie-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .selfie-video {
+    width: 190px;
+    height: 190px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 115px;
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+}
+
+/* ── SMALL MOBILE (≤ 380px) ──────────────────────────────────────── */
+@media (max-width: 380px) {
+  .selfie-card1 {
+    padding: 16px 12px;
+    transform: translateY(-20px);
+    border-radius: 10px;
+  }
+
+  .selfie-title {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  .selfie-video {
+    width: 170px;
+    height: 170px;
+    border-radius: 8px;
+  }
+
+  .selfie-actions {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 110px;
+    padding: 9px 10px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+
+  .btn-primary {
+    margin-top: 14px;
+  }
+
+  .btn-secondary {
+    margin-top: 11px;
+  }
+
+  .selfie-error {
+    font-size: 12px;
+  }
+}
+
+/* ── VERY SMALL (≤ 320px) ────────────────────────────────────────── */
+@media (max-width: 320px) {
+  .selfie-card1 {
+    padding: 14px 10px;
+    transform: translateY(-10px);
+  }
+
+  .selfie-title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .selfie-video {
+    width: 150px;
+    height: 150px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+   .selfie-card1{ margin-top: -50px !important; 
+   }
+  }
