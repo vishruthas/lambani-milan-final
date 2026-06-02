@@ -280,6 +280,7 @@
   font-size: 14px;
   color: #444;
   margin: 4px 0 8px;
+  margin-left: 82px;
 }
 
 /* ─── DIVIDER ────────────────────────────────────────────────────── */
@@ -292,8 +293,7 @@
 /* ─── PERSONAL INFO ──────────────────────────────────────────────── */
 .section-title {
   margin: 0 0 6px;
-  font-weight: 600;
-  font-size: 2rem;
+  font-size: 24px;
   text-align: left;
   color: darkred; 
 }
@@ -302,6 +302,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 6px 0;
+  padding: 10px 14px;
   margin-bottom: 12px;
   padding-left: 18px;
 }
@@ -310,7 +311,6 @@
 
 .about-section {
   margin-bottom: 12px;
-
   padding-left: 18px;
 }
 

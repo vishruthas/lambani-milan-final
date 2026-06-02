@@ -7,34 +7,38 @@
     "icon": "./assets/images/logo.png",
     "scheme": "lambani-milan",
     "userInterfaceStyle": "automatic",
-   "ios": {
-  "supportsTablet": true,
-  "icon": "./assets/images/logo.png"
-},
+
+    "ios": {
+      "supportsTablet": true,
+      "icon": "./assets/images/logo.png"
+    },
+
     "android": {
+      "package": "com.lambanimilan.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logo.png",
         "backgroundColor": "#800000"
       },
       "predictiveBackGestureEnabled": false
     },
+
     "web": {
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
+
     "plugins": [
       "expo-router",
       [
-       [
-  "expo-splash-screen",
-  {
-    "backgroundColor": "#ffffff",
-    "image": "./assets/images/logo.png",
-    "imageWidth": 180
-  }
-]
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./assets/images/logo.png",
+          "imageWidth": 180
+        }
       ]
     ],
+
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true

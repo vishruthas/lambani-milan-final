@@ -7,6 +7,7 @@ import {
 } from "../services/api";
 import "./PhotoUpload.css";
 import BackgroundSlider from "../components/BackgroundSlider";
+import heic2any from "heic2any";
 
 export default function PhotoUpload() {
   const navigate = useNavigate();
@@ -33,8 +34,37 @@ export default function PhotoUpload() {
     };
   }, [previews]);
 
-  const addFiles = e => {
-    const selected = Array.from(e.target.files || []);
+  /* const addFiles = e => {
+  const selected = Array.from(e.target.files || []).map(file => {
+
+    if (!file.type) {
+      const ext = file.name.split(".").pop()?.toLowerCase();
+
+      const mimeMap = {
+        jpg: "image/jpeg",
+        jpeg: "image/jpeg",
+        png: "image/png",
+        webp: "image/webp",
+        heic: "image/heic",
+        heif: "image/heif",
+      };
+
+      const mimeType = mimeMap[ext];
+
+      if (mimeType) {
+        return new File(
+          [file],
+          file.name,
+          {
+            type: mimeType,
+            lastModified: file.lastModified,
+          }
+        );
+      }
+    }
+
+    return file;
+  });
     if (!selected.length) return;
 
     const allowed = selected.slice(0, MAX - files.length);
@@ -43,7 +73,96 @@ export default function PhotoUpload() {
     setFiles(prev => [...prev, ...allowed]);
     setPreviews(prev => [...prev, ...newPreviews]);
     e.target.value = "";
-  };
+  }; */
+  
+  const addFiles = async (e) => {
+  const selected = Array.from(e.target.files || []);
+  if (!selected.length) return;
+
+  const processedFiles = [];
+
+  for (const file of selected) {
+    const ext = file.name.split(".").pop()?.toLowerCase();
+
+    console.log("File:", file.name, "Type:", file.type);
+
+    const isHeic = ext === "heic" || ext === "heif";
+
+    if (isHeic) {
+      try {
+        let convertedBlob = await heic2any({
+          blob: file,
+          toType: "image/jpeg",
+          quality: 0.9,
+        });
+
+        console.log("HEIC CONV RESULT:", convertedBlob);
+
+        if (Array.isArray(convertedBlob)) {
+          convertedBlob = convertedBlob[0];
+        }
+
+        const jpegFile = new File(
+          [convertedBlob],
+          file.name.replace(/\.(heic|heif)$/i, ".jpg"),
+          {
+            type: "image/jpeg",
+            lastModified: file.lastModified,
+          }
+        );
+
+        console.log("JPEG CREATED:", {
+          name: jpegFile.name,
+          type: jpegFile.type,
+          size: jpegFile.size,
+        });
+
+        processedFiles.push(jpegFile);
+      } catch (err) {
+        // Browser already converted it to JPEG
+        if (
+          err?.message?.includes(
+            "Image is already browser readable"
+          )
+        ) {
+          console.log(
+            "Image already browser readable. Using original file."
+          );
+
+          processedFiles.push(file);
+          continue;
+        }
+
+        console.error("===== HEIC CONVERSION ERROR =====");
+        console.error(err);
+
+        setError(
+          err?.message || "Failed to process HEIC image"
+        );
+        return;
+      }
+    } else {
+      // JPG, JPEG, PNG, WEBP
+      processedFiles.push(file);
+    }
+  }
+
+  const allowed = processedFiles.slice(
+    0,
+    MAX - files.length
+  );
+
+  const newPreviews = allowed.map((f) =>
+    URL.createObjectURL(f)
+  );
+
+  setFiles((prev) => [...prev, ...allowed]);
+  setPreviews((prev) => [...prev, ...newPreviews]);
+
+  e.target.value = "";
+};
+
+/* REMOVE PHOTO */
 
   const removePhoto = index => {
     const url = previews[index];
@@ -68,7 +187,7 @@ export default function PhotoUpload() {
       const copy = [...prev];
       copy.splice(index, 1);
       return copy;
-    });
+     });
 
     setSelectedIndex(prev => {
       if (prev === null) return null;
@@ -77,6 +196,8 @@ export default function PhotoUpload() {
       return prev;
     });
   };
+  
+  /* UPLOAD & VERIFY */
 
   const uploadAndVerify = async () => {
     setError("");
@@ -88,11 +209,34 @@ export default function PhotoUpload() {
 
     try {
       setLoading(true);
+      console.log("Files being uploaded:");
 
-      const res = await getPhotoUploadUrls({
-        contentTypes: files.map(f => f.type),
-        fileTypes: files.map(f => f.type),
-      });
+      files.forEach(f => {
+      console.log(f.name, f.type);
+    });
+
+ const contentTypes = files.map((f) => {
+  if (f.type) return f.type;
+
+  const ext = f.name.split(".").pop()?.toLowerCase();
+
+  const mimeMap = {
+    jpg: "image/jpeg",
+    jpeg: "image/jpeg",
+    png: "image/png",
+    webp: "image/webp",
+    heic: "image/heic",
+    heif: "image/heif",
+  };
+
+  return mimeMap[ext] || "application/octet-stream";
+});
+
+const res = await getPhotoUploadUrls({
+  contentTypes,
+  fileTypes: contentTypes,
+});
+
 
       if (!res || !Array.isArray(res.urls)) {
         throw new Error("Invalid response from server when requesting upload URLs");

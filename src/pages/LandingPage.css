@@ -770,7 +770,7 @@ body{
     padding-left: 12px ;
   }
   .culture-line{
-    margin-left:-2px !important; width: 28px;
+    margin-left:-4px !important; width: 28px;
   }
   .section-title3{
     margin-left: 8px !important;
@@ -780,19 +780,19 @@ body{
     margin-left: 60px !important; 
   }
 
-  .why-header {
-    padding-left: 12px ;
-  }
   .why-line {
-  margin-left: 2px !important;
+  margin-left: 5px !important;
   width: 28px;
 }
 
 .section-title4{
-  margin-left: -12px !important;
+  margin-left: 12px !important;
 }
   .why-top{
   gap: 4px !important;
+}
+.why-subtitle {
+  margin-left: 70px !important;
 }
 
 }
@@ -810,7 +810,7 @@ body{
   }
 
 /* ── iPad Pro Fix ── */
-@media (min-width: 1020px) and (max-width: 1025px){
+@media (min-width: 1020px) and (max-width: 1200px){
  
   .lp-about{
     padding-left: 22px;
@@ -824,16 +824,17 @@ body{
     height: auto;
   }
 
-  .about-right{
-    padding-right: 10px;
+  .about-line {
+    margin-left: -24px !important;
   }
   .about-right1{
     margin-left: 10px !important;
   }
-  .about-header {
-    margin-left: -14px !important;
-    gap: 10px;
+
+  .about-subtitle {
+    margin-left: 45px !important;
   }
+  
   .culture-animated{
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -892,10 +893,6 @@ body{
     margin-bottom: 14px;
   }
 
-  .about-subtitle {
-    margin-left: 55px !important;
-  }
-
   .culture-subtitle, .why-subtitle {
     margin-left: 66px !important;
   }
@@ -903,11 +900,9 @@ body{
     margin-left: 9px !important;
   }
 
-  .why-header {
-    margin-left: -6px !important;
-  }
+
   .section-title4{
-  margin-left: -12px !important;
+  margin-left: 12px !important;
 }
   .why-top{
   gap: 4px !important;
@@ -923,7 +918,7 @@ body{
   }
 
   .about-right1 {
-    margin-left: -1px !important;
+    margin-left: 10px !important;
   }
   .about-subtitle {
     margin-left: 70px !important;
@@ -939,9 +934,12 @@ body{
   .why-line {
     margin-left: -2px !important;
   }
+  .section-title3 {
+     margin-left: 10px !important;
+  }
 
   .section-title4{
-  margin-left: 8px !important;
+  margin-left: 10px !important;
 }
   .why-top{
   gap: 4px !important;
@@ -996,13 +994,13 @@ body{
   }
 }
 
-@media (min-width: 1300px) and (max-width: 1400px)  {
+@media (min-width: 1300px) and (max-width: 1441px)  {
   .about-line {
     margin-left: -2px !important;
   }
 
   .about-right1 {
-    margin-left: 2px !important;
+    margin-left: 10px !important;
   }
   .about-subtitle {
     margin-left: 70px !important;
@@ -1014,13 +1012,16 @@ body{
   .culture-subtitle {
     margin-left: 70px !important;
   }
+  .section-title3{
+  margin-left: 10px !important;
+}
 
   .why-line {
     margin-left: -2px !important;
   }
   
   .section-title4{
-  margin-left: 8px !important;
+  margin-left: 10px !important;
 }
   .why-top{
   gap: 4px !important;

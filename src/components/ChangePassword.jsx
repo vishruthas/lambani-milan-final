@@ -118,15 +118,7 @@ const ShieldIcon = () => (
 
   try {
     await changePassword(oldPassword, password);
-    await globalSignOut();
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("username");
-
-    window.dispatchEvent(new Event("logout"));
-
     setShowPopup(true);
-
     setOldPassword("");
     setPassword("");
     setConfirm("");
@@ -297,7 +289,24 @@ const ShieldIcon = () => (
             <div className="cp-overlay">
               <div className="cp-popup">
                 <p>Password updated successfully</p>
-                <button className="cp-okBtn" onClick={() => setShowPopup(false)}>OK</button>
+                <button
+                  className="cp-okBtn"
+                  onClick={async () => {
+                  setShowPopup(false);
+
+              await globalSignOut();
+
+              localStorage.removeItem("access_token");
+              localStorage.removeItem("id_token");
+              localStorage.removeItem("username");
+
+            window.dispatchEvent(new Event("logout"));
+
+              navigate("/landing#login");
+            }}
+          >
+        OK
+      </button>
               </div>
             </div>
           )}

@@ -357,7 +357,7 @@ useEffect(() => {
             />
           ))}
         </div>
-        <p className="fg-info">OTP sent successfully to {maskIdentifier(identifier)}</p>
+        <p className="fg-info">OTP sent successfully to {maskIdentifier(identifier)}. Please check Spam folder if not found in Inbox</p>
       <div className="fg-label-row">
       <label className="fg-label">New Password</label>
     </div>

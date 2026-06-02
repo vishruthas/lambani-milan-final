@@ -16,7 +16,8 @@ import {
   verifyEmailOtp,
   verifyPhoneOtp,
   updateEmail,
-  updatePhoneNumber
+  updatePhoneNumber,
+  resendSignupOtp
 } from "../services/auth";
 import { Helmet } from "react-helmet";
 import { checkUserExists, reactivateAccount } from "../services/api";
@@ -30,6 +31,7 @@ export default function Landing() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [otp, setOtp] = useState(Array(6).fill(""));
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
@@ -45,6 +47,13 @@ export default function Landing() {
   const otpRefs = useRef([]);
   const passwordInfoRef = useRef(null);
   const [pendingVerification, setPendingVerification] = useState(false);
+  const isMatch =
+  confirmPassword.length > 0 &&
+  password === confirmPassword;
+
+  const isMismatch =
+  confirmPassword.length > 0 &&
+  password !== confirmPassword;
 
   const formatIdentifier = (value) => {
     if (!value) return value;
@@ -53,22 +62,25 @@ export default function Landing() {
     return trimmed;
   };
 
+
   const resetFields = () => {
-    setIdentifier("");
-    setPassword("");
-    setConfirmPassword("");
-    setOtp(Array(6).fill(""));
-    setError("");
-    setInfo("");
-    setShowPassword(false);
-    setShowPasswordInfo(false);
-    setCooldown(0);
-    setIsBlocked(false);
-  };
+  setIdentifier("");
+  setPassword("");
+  setConfirmPassword("");
+  setOtp(Array(6).fill(""));
+  setError("");
+  setInfo("");
+  setShowPassword(false);
+  setShowConfirmPassword(false);
+  setShowPasswordInfo(false);
+  setCooldown(0);
+  setIsBlocked(false);
+};
 
   useEffect(() => {
     setShowPassword(false);
     setShowPasswordInfo(false);
+    setShowConfirmPassword(false);
   }, [mode]);
 
    /* COOL DOWN */
@@ -147,7 +159,7 @@ useEffect(() => {
         }
 
         setInfo(
-          `New OTP sent to ${maskIdentifier(formatted)}`
+          `New OTP sent to ${maskIdentifier(formatted)}. Please check Spam folder if not found in Inbox`
         );
       }
 
@@ -223,7 +235,7 @@ useEffect(() => {
     try {
       await signup(formatted, password);
       setMode("verify");
-      setInfo(`OTP sent to ${maskIdentifier(formatted)}`);
+      setInfo(`OTP sent to ${maskIdentifier(formatted)}. Please check Spam folder if not found in Inbox`);
     } catch (e) {
       if (e?.code === "UsernameExistsException") {
         setError("Account already exists.");
@@ -300,6 +312,44 @@ if (!verified) {
   } catch {
 
     setError("Invalid OTP");
+  }
+};
+
+/* RESEND SIGNUP OTP */
+
+const handleResendSignupOtp = async () => {
+  try {
+    const formatted = formatIdentifier(identifier);
+
+    await resendSignupOtp(formatted);
+
+    setInfo(
+      `New OTP sent to ${maskIdentifier(formatted)}. Please check Spam folder if not found in Inbox`
+    );
+
+    setError("");
+
+    setIsBlocked(true);
+    setCooldown(30);
+
+  } catch (err) {
+
+    if (
+      err?.code === "LimitExceededException" ||
+      err?.code === "TooManyRequestsException"
+    ) {
+
+      setError(
+        "Too many OTP requests. Please try again later."
+      );
+
+      setIsBlocked(true);
+      setCooldown(180);
+
+    } else {
+
+      setError(err?.message || "Unable to resend OTP");
+    }
   }
 };
 
@@ -706,13 +756,22 @@ if (!verified) {
 
             <div className="landing-input-wrap" style={{ marginTop: 6 }}>
               <input
-                className="landing-input landing-input2"
-                type="password"
+                className={`landing-input landing-input2 ${isMismatch ? "landing-inputError" : ""} ${isMatch ? "landing-inputSuccess" : ""}`}
+                type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 aria-label="Confirm password"
               />
+              <button
+                type="button"
+                className={`toggle-password ${showConfirmPassword ? "open" : "closed"}`}
+                onClick={() => setShowConfirmPassword((p) => !p)}
+                aria-pressed={showConfirmPassword}
+                aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+              >
+                <EyeIcon open={showConfirmPassword} />
+              </button>
             </div>
 
             {showPasswordInfo && (
@@ -786,33 +845,47 @@ if (!verified) {
 
         {/* VERIFY SIGNUP OTP */}
         {mode === "verify" && (
-          <>
-            <div className="otp-row" onPaste={handleOtpPaste}>
-              {otp.map((digit, i) => (
-                <input
-                  key={i}
-                  ref={(el) => (otpRefs.current[i] = el)}
-                  className="otp-box"
-                  value={digit}
-                  maxLength={1}
-                  inputMode="numeric"
-                  onChange={(e) => handleOtpChange(i, e.target.value)}
-                  onKeyDown={(e) => handleOtpKeyDown(e, i)}
-                  aria-label={`OTP digit ${i + 1}`}
-                />
-              ))}
-            </div>
-            <button
-              className="primary-btn"
-              style={{ opacity: isOtpComplete ? 1 : 0.5 }}
-              disabled={!isOtpComplete}
-              onClick={handleVerify}
-            >
-              Verify OTP
-            </button>
-          </>
-        )}
+  <>
+    <div className="otp-row" onPaste={handleOtpPaste}>
+      {otp.map((digit, i) => (
+        <input
+          key={i}
+          ref={(el) => (otpRefs.current[i] = el)}
+          className="otp-box"
+          value={digit}
+          maxLength={1}
+          inputMode="numeric"
+          onChange={(e) => handleOtpChange(i, e.target.value)}
+          onKeyDown={(e) => handleOtpKeyDown(e, i)}
+          aria-label={`OTP digit ${i + 1}`}
+        />
+      ))}
+    </div>
 
+    <div className="otp-btn-row">
+
+      <button
+        className="secondary-btn resend-btn"
+        onClick={handleResendSignupOtp}
+        disabled={isBlocked}
+      >
+        {isBlocked
+          ? `Resend OTP ${cooldown}s`
+          : "Resend OTP"}
+      </button>
+
+      <button
+        className="primary-btn verify-btn"
+        style={{ opacity: isOtpComplete ? 1 : 0.5 }}
+        disabled={!isOtpComplete}
+        onClick={handleVerify}
+      >
+        Verify OTP
+      </button>
+
+    </div>
+  </>
+)}
         {/* LOGIN */}
         {mode === "login" && (
           <>
@@ -931,7 +1004,7 @@ if (!verified) {
     </div>
 
     <p className="msg info">
-      OTP sent successfully to {maskIdentifier(identifier)}
+      OTP sent successfully to {maskIdentifier(identifier)}. Please check Spam folder if not found in Inbox
     </p>
 
     {/* INFO ICON */}
@@ -1030,8 +1103,8 @@ if (!verified) {
       style={{ marginTop: 6 }}
     >
       <input
-        className="landing-input landing-input2"
-        type={showPassword ? "text" : "password"}
+        className={`landing-input landing-input2 ${isMismatch ? "landing-inputError" : ""} ${isMatch ? "landing-inputSuccess" : ""}`}
+        type={showConfirmPassword ? "text" : "password"}
         placeholder="Confirm New Password"
         value={confirmPassword}
         onChange={(e) =>
@@ -1041,16 +1114,16 @@ if (!verified) {
 
       <button
         type="button"
-        className={`toggle-password ${showPassword ? "open" : "closed"}`}
-        onClick={() => setShowPassword((p) => !p)}
-        aria-pressed={showPassword}
+        className={`toggle-password ${showConfirmPassword ? "open" : "closed"}`}
+        onClick={() => setShowConfirmPassword((p) => !p)}
+        aria-pressed={showConfirmPassword}
         aria-label={
-          showPassword
+          showConfirmPassword
             ? "Hide password"
             : "Show password"
         }
       >
-        <EyeIcon open={showPassword} />
+        <EyeIcon open={showConfirmPassword} />
       </button>
     </div>
 

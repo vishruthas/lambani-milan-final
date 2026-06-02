@@ -172,7 +172,7 @@ export default function EditContact() {
           <h3>Edit E-Mail / Number</h3>
         </div>
         <p>
-          Update the email address or phone number linked to your profile.
+          Update the e-mail address or phone number linked to your profile.
           This is used for login, account recovery, and important notifications.
         </p>
       </div>
@@ -185,7 +185,7 @@ export default function EditContact() {
           <div className="info-badge-icon"><ShieldIcon /></div>
           <div>
             <div className="info-badge-label">
-              Verified {type === "email" ? "Email" : "Phone"}
+              Verified {type === "email" ? "E-mail" : "Phone"}
             </div>
             <div className="info-badge-value"><b>{currentValue}</b></div>
           </div>
@@ -201,10 +201,10 @@ export default function EditContact() {
           </p>
 
           <label className="ec-label">
-            New {type === "email" ? "Email ID" : "Phone Number"}:
+            New {type === "email" ? "E-Mail" : "Phone Number"}:
           </label>
           <input
-            placeholder={type === "email" ? "Enter new email" : "Enter new phone number"}
+            placeholder={type === "email" ? "Enter new E-Mail" : "Enter new Number"}
             value={value}
             onChange={(e) => setValue(e.target.value)}
             className="ec-input"
@@ -221,7 +221,7 @@ export default function EditContact() {
           : "Send Verification OTP"}
         </button>
 
-          {otpSent && <p className="ec-info">OTP sent to {masked}</p>}
+          {otpSent && <p className="ec-info">OTP sent to {masked}. Please check Spam folder if not found in Inbox</p>}
 
           {otpSent && (
             <>
@@ -244,7 +244,7 @@ export default function EditContact() {
         <div className="ec-overlay">
           <div className="ec-popup">
             <p className="ec-popupText">
-              {type === "email" ? "Email" : "Phone"} updated successfully
+              {type === "email" ? "E-Mail" : "Phone"} updated successfully
               <br />
               Please login again
             </p>

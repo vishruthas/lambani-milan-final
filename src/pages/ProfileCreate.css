@@ -103,8 +103,9 @@ body { margin: 0; }
 /* Inner area  */
 .form-inner1 {
   width: 100%;
+  max-width: var(--form-inner-max);
   height: 100%;
-max-height: 58vh;
+  max-height: 58vh;
   margin: 0 auto;
   box-sizing: border-box;
   max-height: calc(78vh - 70px);
@@ -415,38 +416,25 @@ html {
   }
  
  .card1{
-
   width: min(88vw, 860px) !important;
-
   height: auto !important;
   min-height: unset !important;
   max-height: 72vh !important;
-
   padding: 18px 24px !important;
-
   top: 48% !important;
   left: 35% !important;
-
   transform: translate(-50%, -50%) !important;
-
   overflow: hidden !important;
-
   display: flex !important;
   flex-direction: column !important;
 }
 
 .form-inner1{
-
   height: auto !important;
-
   flex: 1 !important;
-
   min-height: 0 !important;
-
   max-height: calc(68vh - 90px) !important;
-
   overflow-y: auto !important;
-
   padding-bottom: 28px !important;
 }
   .profile-form .grid{
@@ -480,6 +468,7 @@ html {
 @media (min-width: 1512px) {
   .card1 {
     top: 54.5% !important;
+    left: 22% !important;
   }
 }
 
@@ -531,14 +520,50 @@ html {
 
   .form-inner1{
     flex: 1 !important;
-
     min-height: 0 !important;
-
     max-height: calc(82vh - 60px) !important;
-
     overflow-y: auto !important;
-
     padding-bottom: 40px !important;
   }
 
+}
+
+/* iPad Pro 1024px */
+@media screen and (min-width: 1020px) and (max-width: 1025px) {
+
+  .card1 {
+    width: 90vw !important;
+    max-width: 900px !important;
+    left: 45% !important;
+    top: 58% !important;
+    transform: translate(-50%, -50%) !important;
+    padding: 24px !important;
+  }
+
+  .form-inner1 {
+    max-width: 750px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+   
+  }
+
+  .profile-form .grid {
+    gap: 16px 20px !important;
+  }
+
+  .input-field,
+  input.input-field,
+  select.input-field,
+  textarea.input-field {
+    min-height: 46px !important;
+    font-size: 15px !important;
+  }
+
+  .label {
+    font-size: 14px !important;
+  }
+
+  .title1 {
+    font-size: 30px !important;
+  }
 }

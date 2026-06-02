@@ -83,10 +83,33 @@ export default function DeleteAccount({ goToDeactivate }) {
 );
 
 
-  const handleDeleteClick = () => {
-    if (!canSubmit) return;
-      setShowPopup(true);
-  };
+ 
+  const handleDeleteClick = async () => {
+  if (!canSubmit) return;
+
+  try {
+    await deleteAccount({
+      password,
+      reason: reason === "Other" ? otherText : reason,
+      validateOnly: true,
+    });
+
+    setError("");
+    setShowPopup(true);
+  } catch (err) {
+    const msg = err?.message || "";
+
+    if (
+      msg.toLowerCase().includes("password") ||
+      msg.toLowerCase().includes("auth") ||
+      msg.toLowerCase().includes("not authorized")
+    ) {
+      setError("Incorrect password");
+    } else {
+      setError("Failed to validate password");
+    }
+  }
+};
 
   const handleConfirmDelete = async () => {
     try {
@@ -157,11 +180,7 @@ export default function DeleteAccount({ goToDeactivate }) {
 
     {/* Feedback */}
     <div className="de-card">
-      <h3>We'd love your feedback</h3>
-      <p className="sub-text">
-        Help us understand why you're leaving.
-      </p>
-
+      <h3> Help us understand why you're leaving.</h3>
       <div className="radio-group">
         {reasons.map(opt => (
           <label
@@ -251,13 +270,13 @@ export default function DeleteAccount({ goToDeactivate }) {
   <li>Your profile will be removed immediately and you will not be able to log in again.</li>
   <li>For safety and compliance purposes, your data will be retained for upto 60 days.</li>
 </ul>
-            <div className="da-actionRow">
-              <button className="da-okBtn" onClick={handleConfirmDelete}>
+            <div className="de-actionRow">
+              <button className="de-okBtn" onClick={handleConfirmDelete}>
                 OK
               </button>
 
               <button
-                className="da-cancelBtn"
+                className="de-cancelBtn"
                 onClick={() => {
                   setShowPopup(false);
                   setConfirmed(false);

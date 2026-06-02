@@ -295,6 +295,18 @@ html, body {
   box-shadow: 0 6px 18px rgba(197,58,80,0.08);
 }
 
+.landing-inputError {
+  border: 2px solid #e74c3c;
+  box-shadow: 0 0 6px #e74c3c80;
+}
+
+.landing-inputSuccess {
+  border: 2px solid #27ae60;
+  box-shadow: 0 0 6px rgba(39, 174, 96, 0.5);
+}
+
+
+
 .msg {
   margin: 0px 45px 4px;
   font-size: 14px;

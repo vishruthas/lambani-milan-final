@@ -135,7 +135,7 @@ const EyeIcon = ({ open = false }) => (
         {[
           "Found a match",
           "Need a break",
-          "Not getting matches",
+          "Not finding suitable matches",
           "Privacy concerns",
           "Other"
         ].map((opt) => (
@@ -154,7 +154,7 @@ const EyeIcon = ({ open = false }) => (
       
       <div className="da-box">
         <p className="da-label">
-          Enter password
+          Enter Password
         </p>      
         <div className="da-password-field">
           <input

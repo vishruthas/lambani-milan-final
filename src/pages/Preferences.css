@@ -94,7 +94,7 @@ body { margin: 0; }
 .prefs-card {
   position: fixed;max-height: calc(100vh - 130px);
   top: 56%;
-  left: 50%;
+  left: 49.9%;
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: var(--card-max);
