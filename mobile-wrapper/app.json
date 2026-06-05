@@ -7,12 +7,10 @@
     "icon": "./assets/images/logo.png",
     "scheme": "lambani-milan",
     "userInterfaceStyle": "automatic",
-
     "ios": {
       "supportsTablet": true,
       "icon": "./assets/images/logo.png"
     },
-
     "android": {
       "package": "com.lambanimilan.app",
       "adaptiveIcon": {
@@ -21,12 +19,10 @@
       },
       "predictiveBackGestureEnabled": false
     },
-
     "web": {
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-
     "plugins": [
       "expo-router",
       [
@@ -38,10 +34,15 @@
         }
       ]
     ],
-
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "2e1d71c7-dc16-4f1c-a46a-8b9260ef81d4"
+      }
     }
   }
 }

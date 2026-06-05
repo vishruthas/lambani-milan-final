@@ -349,6 +349,8 @@ useEffect(() => {
               key={i}
               ref={(el) => (otpRefs.current[i] = el)}
               className="otp-box"
+              type="password"
+              inputMode="numeric"
               value={digit}
               maxLength={1}
               onChange={(e) => handleOtpChange(i, e.target.value)}

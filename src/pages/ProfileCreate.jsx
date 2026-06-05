@@ -117,11 +117,9 @@ function ProfileCreate() {
     age--;
   }
 
-  setForm((prev) => ({ ...prev, age }));
-
-  if (form.gender === "female" && age < 18) {
+  if (form.gender === "Female" && age < 18) {
     setAgeValidationError("Minimum age for female is 18 years.");
-  } else if (form.gender === "male" && age < 21) {
+  } else if (form.gender === "Male" && age < 21) {
     setAgeValidationError("Minimum age for male is 21 years.");
   } else {
     setAgeValidationError("");

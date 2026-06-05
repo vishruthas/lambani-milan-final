@@ -21,6 +21,9 @@ export default function ChangePassword() {
   const isMatch = confirm && password === confirm;
   const isMismatch = confirm && password !== confirm;
 
+  
+
+
   const Icon = ({ children, size = 18, ...props }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
       stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -241,6 +244,17 @@ const ShieldIcon = () => (
                   <EyeIcon open={showNew} />
                 </button>
               </div>
+              {password && (
+              <div className="cp-strengthWrap" aria-hidden={false}>
+                <div
+                  className="cp-strengthBar"
+                  style={{ width: strength.width, background: strength.color }}
+                />
+                <div className="cp-strengthLabel" style={{ color: strength.color }}>
+                  {strength.label}
+                </div>
+              </div>
+            )}
 
               {showInfo && (
                 <div className="cp-tooltip">

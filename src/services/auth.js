@@ -420,3 +420,29 @@ export async function isPhoneVerified() {
     });
   });
 }
+
+/* RESEND OTP FOR UPDATE OF EMAIL N NUMBER */
+
+export async function resendEmailOtp() {
+  const user = await getCurrentUserSafe();
+
+  return new Promise((resolve, reject) => {
+    user.getAttributeVerificationCode("email", {
+      onSuccess: resolve,
+      onFailure: reject,
+      inputVerificationCode: () => {}
+    });
+  });
+}
+
+export async function resendPhoneOtp() {
+  const user = await getCurrentUserSafe();
+
+  return new Promise((resolve, reject) => {
+    user.getAttributeVerificationCode("phone_number", {
+      onSuccess: resolve,
+      onFailure: reject,
+      inputVerificationCode: () => {}
+    });
+  });
+}

@@ -210,39 +210,45 @@ export default function LandingPage() {
   };
 
   return (
-    <>
+   <>
   <Helmet>
     <title>
-      Lambani Matrimony | Trusted Banjara Matrimony Platform
+      Lambani Milan – Verified Lambani & Banjara Matrimony
     </title>
 
     <meta
       name="description"
-      content="Lambani Milan is a trusted matrimony platform for the Lambani and Banjara community. Find verified brides and grooms for meaningful marriage connections across India."
+      content="A trusted matrimony platform for the Lambani, Banjara, Gor, Sugali and Lambadi community. Find verified brides and grooms across India."
     />
 
     <meta
       name="keywords"
-      content="Lambani Matrimony, Banjara Matrimony, Lambani Bride, Lambani Groom, Lambani Marriage, Banjara Marriage, Lambani Community, Matrimony Site"
+      content="Lambani Matrimony, Banjara Matrimony, Gor Matrimony, Sugali Matrimony, Lambadi Matrimony, Lambani Bride, Lambani Groom, Banjara Marriage, Lambani Community, Matrimony Site"
     />
 
     <meta
       property="og:title"
-      content="Lambani Milan | Lambani Matrimony"
+      content="Lambani Milan – Lambani & Banjara Matrimony"
     />
 
     <meta
       property="og:description"
-      content="A trusted matrimony platform built for the Lambani and Banjara community."
+      content="A trusted matrimony platform for the Lambani, Banjara, Gor, Sugali and Lambadi community. Find verified brides and grooms across India."
     />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lambani Milan" />
+    <meta property="og:url" content="https://lambanimilan.com/" />
+    <meta property="og:image" content="https://lambanimilan.com/og-image.jpg" />
 
+    <link rel="canonical" href="https://lambanimilan.com/" />
+   
     <meta
       name="robots"
       content="index, follow"
     />
   </Helmet>
+
 
     <div className="lp-root2">
       <header className="lp-header">

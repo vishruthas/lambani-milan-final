@@ -245,35 +245,7 @@ useEffect(() => {
     }
   };
 
-  /* const handleVerify = async () => {
-    if (!isOtpComplete) return;
-    const formatted = formatIdentifier(identifier);
-    try {
-      await confirmSignup(formatted, otp.join(""));
-      await login(formatted, password);
-      const isPhone = formatted.startsWith("+91");
-
-const verified = isPhone
-  ? await isPhoneVerified()
-  : await isEmailVerified();
-
-if (!verified) {
-
-  setError(
-    `Please verify your ${
-      isPhone ? "mobile number" : "email"
-    } using OTP before login`
-  );
-
-  return;
-}
-      window.dispatchEvent(new Event("login"));
-      navigate("/profile-create");
-    } catch {
-      setError("Invalid OTP");
-    }
-  }; */
-
+ 
   const handleVerify = async () => {
 
   if (!isOtpComplete) return;
@@ -353,35 +325,7 @@ const handleResendSignupOtp = async () => {
   }
 };
 
-  /* const handleLogin = async () => {
-    setError("");
-    const formatted = formatIdentifier(identifier);
-    try {
-      await login(formatted, password);
-      let data = await checkUserExists();
-      console.log("check user", data);
-      if (data.accountStatus === "deactivated") {
-        console.log("Reactivating accont");
-        await reactivateAccount();
-        data = await checkUserExists();
-        console.log("After Reactivate", data);
-      }
-      window.dispatchEvent(new Event("login"));
-      await redirectUser(navigate);
-    } catch (e) {
-      const code = e?.code || "";
-      if (code === "UserNotFoundException") {
-        setError("Account does not exist.");
-      } else if (code === "NotAuthorizedException") {
-        setError("Incorrect password/Mail ID.");
-      } else if (code === "UserNotConfirmedException") {
-        setError("Please verify your account first.");
-      } else {
-        setError("Login failed.");
-      }
-      setPassword("");
-    }
-  }; */
+ 
 
   const handleLogin = async () => {
 
@@ -545,7 +489,7 @@ const handleResendSignupOtp = async () => {
   console.log(err);
 
   if (err?.code === "CodeMismatchException") {
-    setError("Enter correct OTP");
+    setError("Invalid OTP");
   } else if (err?.code === "ExpiredCodeException") {
     setError("OTP expired");
   } else {
@@ -671,17 +615,33 @@ const handleResendSignupOtp = async () => {
 
     <meta
       name="description"
-      content="Login or create your Lambani Milan account to connect with verified Lambani and Banjara bride and groom profiles."
+      content="Login or create your free Lambani Milan account to connect with verified Lambani and Banjara brides and grooms across India."
     />
 
     <meta
       name="keywords"
-      content="Lambani login, Lambani register, Banjara matrimony registration, Lambani matrimony account"
+      content="Lambani Milan login, Lambani matrimony login, Lambani matrimony registration, Banjara matrimony login, Lambani Milan register"
     />
 
     <meta
+      property="og:title"
+      content="Login or Register | Lambani Milan"
+    />
+
+    <meta
+      property="og:description"
+      content="Login or create your free Lambani Milan account to find verified Lambani and Banjara matches."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lambani Milan" />
+    <meta property="og:url" content="https://lambanimilan.com/landing#login" />
+
+    <link rel="canonical" href="https://lambanimilan.com/landing#login" />
+
+    <meta
       name="robots"
-      content="noindex, follow"
+      content="index, follow"
     />
   </Helmet>
 
@@ -851,6 +811,7 @@ const handleResendSignupOtp = async () => {
         <input
           key={i}
           ref={(el) => (otpRefs.current[i] = el)}
+          type="password"
           className="otp-box"
           value={digit}
           maxLength={1}
@@ -992,6 +953,7 @@ const handleResendSignupOtp = async () => {
         <input
           key={i}
           ref={(el) => (otpRefs.current[i] = el)}
+          type="password"
           className="otp-box"
           value={digit}
           maxLength={1}

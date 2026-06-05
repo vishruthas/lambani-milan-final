@@ -1,0 +1,27 @@
+User-agent: *
+
+# Public pages
+
+Allow: /
+Allow: /landing
+
+# Private pages
+
+Disallow: /home
+Disallow: /profile/
+Disallow: /interests
+Disallow: /messages
+Disallow: /chat
+Disallow: /my-profile
+Disallow: /manage-photos
+Disallow: /edit-basic
+Disallow: /edit-preferences
+Disallow: /profile-create
+Disallow: /selfie-upload
+Disallow: /photo-upload
+Disallow: /preferences
+Disallow: /account-settings
+Disallow: /privacy-settings
+
+Sitemap: https://lambanimilan.com/sitemap.xml
+

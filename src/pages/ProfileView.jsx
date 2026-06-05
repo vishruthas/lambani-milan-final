@@ -133,46 +133,44 @@ async function handleUnsendInterest() {
   }
 }
 
-/* REPORT USER */
+/* REPORT */
 
 async function handleReport() {
+
   if (!reportReason) {
     alert("Please select a reason");
     return;
   }
+
   let finalReason = reportReason;
+
   if (reportReason === "Others") {
     if (!customReason.trim()) {
-    alert("Please enter a reason");
-    return;
+      alert("Please enter a reason");
+      return;
     }
     finalReason = customReason;
-    }
+  }
 
   try {
-    // report
     await reportUser({
-      reportedUserId: profile.userId, 
+      reportedUserId: profile.userId,
       reason: finalReason
     });
     setShowReportPopup(false);
     setReportReason("");
     setCustomReason("");
 
-    setSuccessMsg(`User reported successfully`);
-
-    // auto block
-    await blockUser(profile.userId);
-
     setTimeout(() => {
-      setSuccessMsg("");
       navigate("/home");
     }, 1000);
 
   } catch (e) {
+    console.error(e);
     alert(e.message || "Failed to report user");
   }
 }
+
 
  /* GET INTEREST */
 
@@ -429,7 +427,20 @@ async function handleReport() {
             profile.age ? `${profile.age} yrs` : null,
             profile.location
           )}
+
+          {interestStatus === "rejected" && interestDirection === "sent" && (
+    <span className="declined-inline-text">
+       Interest declined
+    </span>
+  )}
+
+  {interestStatus === "rejected" && interestDirection === "received" && (
+    <span className="declined-inline-text">
+       You declined this interest
+    </span>
+  )}
         </div>
+        
 
         <hr className="divider" />
 
@@ -524,17 +535,18 @@ async function handleReport() {
             </button>
           </>
         )}
-        {interestStatus === "rejected" && interestDirection === "sent" && (
-          <div className="rejected-inline">Interest Declined</div>
-        )}
-        {interestStatus === "rejected" && interestDirection === "received" && (
-          <div className="rejected-inline">You Declined the Interest</div>
-        )}
+        
       </div>
 
       {showBlockConfirm && (
-  <div className="popup-overlay">
-    <div className="popup-box">
+  <div
+  className="popup-overlay"
+  onClick={(e) => e.stopPropagation()}
+>
+  <div
+    className="popup-box"
+    onClick={(e) => e.stopPropagation()}
+  >
       <h3>Block User?</h3>
       <p>
         Are you sure you want to block this user?
@@ -549,15 +561,20 @@ async function handleReport() {
         </button>
 
         <button
-          className="btn-confirm"
-          onClick={handleBlock}
-        >
-          Confirm
-        </button>
+  type="button"
+  className="btn-confirm"
+  onClick={(e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleBlock();
+  }}
+>
+  Confirm
+</button>
       </div>
     </div>
     {successMsg && (
-  <div className="success-popUp">
+  <div className="success-popup">
     {successMsg}
     </div>
 )}
@@ -565,8 +582,14 @@ async function handleReport() {
   </div>
 )}
 {showReportPopup && (
-  <div className="popup-overlay">
-    <div className="popup-box">
+ <div
+  className="popup-overlay"
+  onClick={(e) => e.stopPropagation()}
+>
+  <div
+    className="popup-box"
+    onClick={(e) => e.stopPropagation()}
+  >
 
       <h3>Report User</h3>
       <p>Select a reason:</p>
@@ -620,11 +643,16 @@ async function handleReport() {
         </button>
 
         <button
-          className="btn-confirm"
-          onClick={handleReport}
-        >
-          Confirm
-        </button>
+  type="button"
+  className="btn-confirm"
+  onClick={(e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleReport();
+  }}
+>
+  Confirm
+</button>
       </div>
 
     </div>

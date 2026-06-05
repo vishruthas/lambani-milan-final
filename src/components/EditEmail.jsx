@@ -7,7 +7,9 @@ import {
   updateEmail,
   updatePhoneNumber,
   verifyEmailOtp,
-  verifyPhoneOtp
+  verifyPhoneOtp,
+  resendEmailOtp,
+  resendPhoneOtp
 } from "../services/auth";
 import "./EditEmail.css";
 
@@ -49,17 +51,21 @@ export default function EditContact() {
   }, []);
 
   useEffect(() => {
-  if (cooldown === 0) {
-    setIsBlocked(false);
-    return;
-  }
+  if (!isBlocked) return;
 
   const timer = setInterval(() => {
-    setCooldown((prev) => prev - 1);
+    setCooldown((prev) => {
+      if (prev <= 1) {
+        clearInterval(timer);
+        setIsBlocked(false);
+        return 0;
+      }
+      return prev - 1;
+    });
   }, 1000);
 
   return () => clearInterval(timer);
-}, [cooldown]);
+}, [isBlocked]);
 
   const maskValue = (val) => {
     if (!val) return "";
@@ -70,26 +76,9 @@ export default function EditContact() {
     return "******" + String(val).slice(-4);
   };
 
-  /* const handleSendOtp = async () => {
-    try {
-      if (!value) return setMessage("Please enter value");
-      if (value === currentValue) return setMessage("New value cannot be same as current");
-      if (type === "email") {
-        await updateEmail(value.trim());
-      } else {
-        await updatePhoneNumber(value.trim());
-      }
-      setOtpSent(true);
-      setMasked(maskValue(value));
-      setMessage("");
-    } catch (err) {
-      setMessage(err?.message || "Error sending OTP");
-    }
-  }; */
-
-  const handleSendOtp = async () => {
+  /* SEND */
+const handleSendOtp = async () => {
   try {
- 
     setMessage("");
     setOtp("");
 
@@ -108,22 +97,53 @@ export default function EditContact() {
       );
     }
 
-    if (type === "email") {
-      await updateEmail(value.trim());
+    if (!otpSent) {
+
+      if (type === "email") {
+        await updateEmail(value.trim());
+      } else {
+        await updatePhoneNumber(value.trim());
+      }
+
     } else {
-      await updatePhoneNumber(value.trim());
+
+      if (type === "email") {
+        await resendEmailOtp();
+      } else {
+        await resendPhoneOtp();
+      }
+
+      console.log("AFTER resend");
     }
+
+    console.log("SETTING COOLDOWN");
 
     setOtpSent(true);
     setMasked(maskValue(value));
+
     setIsBlocked(true);
     setCooldown(60);
 
   } catch (err) {
+    
+    if (
+      err?.code === "LimitExceededException" ||
+      err?.code === "TooManyRequestsException"
+    ) {
 
-    setMessage(
-      err?.message || "Error sending OTP"
-    );
+      setMessage(
+        "Too many OTP requests. Please try again later."
+      );
+
+      setIsBlocked(true);
+      setCooldown(180);
+
+    } else {
+
+      setMessage(
+        err?.message || "Error sending OTP"
+      );
+    }
   }
 };
   const handleVerify = async () => {
@@ -204,38 +224,79 @@ export default function EditContact() {
             New {type === "email" ? "E-Mail" : "Phone Number"}:
           </label>
           <input
-            placeholder={type === "email" ? "Enter new E-Mail" : "Enter new Number"}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            className="ec-input"
-          />
-          <button
-            className="ec-btn"
-            onClick={handleSendOtp}
-            disabled={!value || isBlocked}
-          >
-          {otpSent
-            ? isBlocked
-            ? `Resend OTP in ${cooldown}s`
-            : "Resend OTP"
-          : "Send Verification OTP"}
-        </button>
+  placeholder={type === "email" ? "Enter new E-Mail" : "Enter new Number"}
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+  className="ec-input"
+/>
 
-          {otpSent && <p className="ec-info">OTP sent to {masked}. Please check Spam folder if not found in Inbox</p>}
+{otpSent && (
+  <div className="otp-container">
+  {[0, 1, 2, 3, 4, 5].map((index) => (
+    <input
+      key={index}
+      type="password"
+      inputMode="numeric"
+      maxLength={1}
+      value={otp[index] || ""}
+      onChange={(e) => {
+        const value = e.target.value.replace(/\D/g, "");
 
-          {otpSent && (
-            <>
-              <input
-                placeholder="Enter OTP"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                className="ec-input"
-              />
-              <button className="ec-btn" onClick={handleVerify}>
-                Verify & Update
-              </button>
-            </>
-          )}
+        const otpArray = otp.split("");
+        otpArray[index] = value;
+
+        const newOtp = otpArray.join("");
+        setOtp(newOtp);
+
+        if (value && e.target.nextSibling) {
+          e.target.nextSibling.focus();
+        }
+      }}
+      onKeyDown={(e) => {
+        if (
+          e.key === "Backspace" &&
+          !e.target.value &&
+          e.target.previousSibling
+        ) {
+          e.target.previousSibling.focus();
+        }
+      }}
+      className="otp-box"
+    />
+  ))}
+</div>
+)}
+
+{!otpSent ? (
+  <button
+    className="ec-btn"
+    onClick={handleSendOtp}
+    disabled={!value || isBlocked}
+  >
+    Send OTP
+  </button>
+) : (
+  <div className="ec-btn-row">
+    <button
+      className="ec-btn"
+      onClick={handleSendOtp}
+      disabled={isBlocked}
+    >
+      {isBlocked
+        ? `Resend OTP in ${cooldown}s`
+        : "Resend OTP"}
+    </button>
+
+    <button
+      className="ec-btn"
+      onClick={handleVerify}
+      disabled={!otp}
+    >
+      Verify & Update
+    </button>
+  </div>
+)}
+           {otpSent && <p className="ec-info">OTP sent to {masked}. Please check Spam folder if not found in Inbox</p>}
           {message && <p className="ec-error">{message}</p>}
         </div>
       </div>
