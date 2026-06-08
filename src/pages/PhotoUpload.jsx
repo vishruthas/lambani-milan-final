@@ -7,7 +7,7 @@ import {
 } from "../services/api";
 import "./PhotoUpload.css";
 import BackgroundSlider from "../components/BackgroundSlider";
-import heic2any from "heic2any";
+import { heicTo } from "heic-to";
 
 export default function PhotoUpload() {
   const navigate = useNavigate();
@@ -75,92 +75,64 @@ export default function PhotoUpload() {
     e.target.value = "";
   }; */
   
-  const addFiles = async (e) => {
-  const selected = Array.from(e.target.files || []);
-  if (!selected.length) return;
 
-  const processedFiles = [];
+    const addFiles = async (e) => {
+    const selected = Array.from(e.target.files || []);
+    if (!selected.length) return;
 
-  for (const file of selected) {
-    const ext = file.name.split(".").pop()?.toLowerCase();
+    setError(""); 
+    const processedFiles = [];
 
-    console.log("File:", file.name, "Type:", file.type);
+    for (const file of selected) {
+      const ext = file.name.split(".").pop()?.toLowerCase();
+      console.log("Processing File:", file.name, "Type:", file.type);
 
-    const isHeic = ext === "heic" || ext === "heif";
+      const isHeic = ext === "heic" || ext === "heif";
 
-    if (isHeic) {
-      try {
-        let convertedBlob = await heic2any({
-          blob: file,
-          toType: "image/jpeg",
-          quality: 0.9,
-        });
-
-        console.log("HEIC CONV RESULT:", convertedBlob);
-
-        if (Array.isArray(convertedBlob)) {
-          convertedBlob = convertedBlob[0];
-        }
-
-        const jpegFile = new File(
-          [convertedBlob],
-          file.name.replace(/\.(heic|heif)$/i, ".jpg"),
-          {
+      if (isHeic) {
+        try {
+          const convertedBlob = await heicTo({
+            blob: file,
             type: "image/jpeg",
-            lastModified: file.lastModified,
-          }
-        );
+            quality: 0.9,
+          });
 
-        console.log("JPEG CREATED:", {
-          name: jpegFile.name,
-          type: jpegFile.type,
-          size: jpegFile.size,
-        });
-
-        processedFiles.push(jpegFile);
-      } catch (err) {
-        // Browser already converted it to JPEG
-        if (
-          err?.message?.includes(
-            "Image is already browser readable"
-          )
-        ) {
-          console.log(
-            "Image already browser readable. Using original file."
+          const jpegFile = new File(
+            [convertedBlob],
+            file.name.replace(/\.(heic|heif)$/i, ".jpg"),
+            {
+              type: "image/jpeg",
+              lastModified: file.lastModified,
+            }
           );
 
-          processedFiles.push(file);
-          continue;
+          processedFiles.push(jpegFile);
+        } catch (err) {
+          console.warn(`HEIC processing bypassed for ${file.name}:`, err?.message);
+
+          if (err?.message?.includes("ftyp") || err?.message?.includes("readable")) {
+            console.log("File structural check bypassed. Appending original file stream.");
+            processedFiles.push(file);
+          } else {
+            console.error("Critical conversion error:", err);
+            setError(`Skipped unreadable file: ${file.name}`);
+          }
         }
-
-        console.error("===== HEIC CONVERSION ERROR =====");
-        console.error(err);
-
-        setError(
-          err?.message || "Failed to process HEIC image"
-        );
-        return;
+      } else {
+        // Standard extensions (JPG, JPEG, PNG, WEBP)
+        processedFiles.push(file);
       }
-    } else {
-      // JPG, JPEG, PNG, WEBP
-      processedFiles.push(file);
     }
-  }
+    const allowed = processedFiles.slice(0, MAX - files.length);
+    const newPreviews = allowed.map((f) => URL.createObjectURL(f));
 
-  const allowed = processedFiles.slice(
-    0,
-    MAX - files.length
-  );
+    setFiles((prev) => [...prev, ...allowed]);
+    setPreviews((prev) => [...prev, ...newPreviews]);
 
-  const newPreviews = allowed.map((f) =>
-    URL.createObjectURL(f)
-  );
+    e.target.value = "";
+  };
 
-  setFiles((prev) => [...prev, ...allowed]);
-  setPreviews((prev) => [...prev, ...newPreviews]);
 
-  e.target.value = "";
-};
 
 /* REMOVE PHOTO */
 

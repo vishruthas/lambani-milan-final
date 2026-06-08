@@ -94,6 +94,7 @@ export default function EditPreferences() {
   const isScrolling = useRef(false);
   const [gothraPlaceholder, setGothraPlaceholder] = useState("Select Gothra");
   const [districtPlaceholder, setDistrictPlaceholder] = useState("Select District");
+  const [gender, setGender] = useState("");
 
 
   useEffect(() => { load(); }, []);
@@ -101,6 +102,7 @@ export default function EditPreferences() {
 async function load() {
     const res = await getMyProfile();
     const data = res.profile;
+    setGender(data.gender || "");
     const groupedLocations = (data.preferences?.preferredLocations || []).reduce((acc, loc) => {
   if (!acc[loc.state]) acc[loc.state] = [];
    if (
@@ -364,14 +366,27 @@ const addLocation = () => {
 /* SAVE PREFERNCES */
 
   async function savePreferencesData() {
-    if (
-        prefData.minAge &&
-        prefData.maxAge &&
-        prefData.minAge >= prefData.maxAge
-    ) {
-        setWarning("Min age should be less than Max age");
-        return;
-    }
+    const minimumAllowedAge =
+  gender?.toLowerCase() === "male" ? 18 : 21;
+
+if (
+  prefData.minAge &&
+  Number(prefData.minAge) < minimumAllowedAge
+) {
+  setWarning(
+    `Minimum age should be ${minimumAllowedAge} or above`
+  );
+  return;
+}
+
+if (
+  prefData.minAge &&
+  prefData.maxAge &&
+  Number(prefData.minAge) >= Number(prefData.maxAge)
+) {
+  setWarning("Min age should be less than Max age");
+  return;
+}
   try {
     await updateUserProfile({
       preferences: {
@@ -435,6 +450,13 @@ const addLocation = () => {
     alert("Failed to update preferences");
   }}
 
+  const minimumAllowedAge =
+  gender?.toLowerCase() === "male" ? 18 : 21;
+
+const isAgeValid =
+  Number(prefData.minAge) >= minimumAllowedAge &&
+  Number(prefData.maxAge) > Number(prefData.minAge);
+
   return (
   <div className="page5-wrapper5">
 
@@ -479,9 +501,22 @@ const addLocation = () => {
               type="number"
               value={prefData.minAge || ""}
               onChange={e =>
-                setPrefData({ ...prefData, minAge: Number(e.target.value) })
+                setPrefData({ 
+                  ...prefData, 
+                  minAge: e.target.value === ""
+                    ? ""
+                    : Number(e.target.value) 
+                  })
               }
             />
+            {prefData.minAge &&
+            Number(prefData.minAge) <
+              (gender?.toLowerCase() === "male" ? 18 : 21) && (
+          <div className="error5">
+            Minimum age should be at least{" "}
+            {gender?.toLowerCase() === "male" ? 18 : 21}
+          </div>
+        )}
           </div>
         </div>
 
@@ -493,7 +528,11 @@ const addLocation = () => {
               type="number"
               value={prefData.maxAge || ""}
               onChange={e =>
-                setPrefData({ ...prefData, maxAge: Number(e.target.value) })
+                setPrefData({ ...prefData, 
+                  maxAge: e.target.value
+                  ? ""
+                  : Number(e.target.value)
+                 })
               }
             />
           </div>
@@ -1076,7 +1115,11 @@ setGothraPlaceholder("Select Gothra");
       )}
 
       <div className="btnRow5">
-        <button className="btn5" onClick={savePreferencesData}>Save</button>
+        <button className="btn5" 
+          onClick={savePreferencesData}
+          disabled={!isAgeValid}>
+            Save
+        </button>
         <button className="btn5 btn-secondary5" onClick={() => navigate("/profile")}>Cancel</button>
       </div>
 

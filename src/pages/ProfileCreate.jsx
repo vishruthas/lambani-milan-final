@@ -95,7 +95,7 @@ function ProfileCreate() {
     return [];
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
   if (!form.dob) {
     setForm((prev) => ({ ...prev, age: "" }));
     setAgeValidationError("");
@@ -125,6 +125,42 @@ function ProfileCreate() {
     setAgeValidationError("");
   }
 
+}, [form.dob, form.gender]); */
+useEffect(() => {
+  if (!form.dob) {
+    setForm((prev) => ({ ...prev, age: "" }));
+    setAgeValidationError("");
+    return;
+  }
+
+  const birth = new Date(form.dob);
+  if (Number.isNaN(birth.getTime())) {
+    setForm((prev) => ({ ...prev, age: "" }));
+    setAgeValidationError("");
+    return;
+  }
+
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+
+  // ADD THIS
+  setForm((prev) => ({
+    ...prev,
+    age: age.toString()
+  }));
+
+  if (form.gender === "Female" && age < 18) {
+    setAgeValidationError("Minimum age for female is 18 years.");
+  } else if (form.gender === "Male" && age < 21) {
+    setAgeValidationError("Minimum age for male is 21 years.");
+  } else {
+    setAgeValidationError("");
+  }
 }, [form.dob, form.gender]);
 
   const handleChange = (e) => {

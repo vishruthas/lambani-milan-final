@@ -283,14 +283,17 @@ body{
 
 
 /* ── Section decorators ── */
-/* ── Our Story Header ── */
+/* ── Our Story Header ── 
 .about-header{
   max-width: var(--max-width);
   margin: 0 auto 10px auto;
   padding: 0 12px;
-  margin-left: 10px;
-}
+  margin-left: 8px;
+} */
 
+.about-header {
+   margin: 0 auto 10px auto;
+}
 
 .about-top{
   display:flex;
@@ -298,57 +301,17 @@ body{
   gap:8px;
 }
 
-.about-line{
-  width:28px;
-  height:1px;
-  background:#c4983a;
-  position:relative;
-  bottom:6px;
-  flex-shrink:0;
-   margin-left:-80px;
-}
-
-.about-subtitle{
-  display:block;
-  color:#7a1f2b;
-  margin-top:-1px;
-  margin-left:80px !important;
-  font-family:Georgia,'Times New Roman',serif;
-  letter-spacing:-0.5px;
-  line-height:1.05;
-  font-weight:400;
-  font-size:50px;
-  word-break:break-word;
-  width:1020px;
-  max-width:100%;
-}
-
-.culture-header{ margin-top:22px; }
+.culture-header{ margin-top:22px !important; }
 .culture-top{ display:flex; align-items:center; gap:8px; }
-.culture-line{ width:28px; height:1px; background:#c4983a; position:relative; bottom:6px; flex-shrink:0; }
-.culture-subtitle{
-  display:block; color:#7a1f2b; margin-top:-1px; margin-left:82px;
-  font-family:Georgia,'Times New Roman',serif;
-  letter-spacing:-0.5px; line-height:1.05; font-weight:400; font-size:50px;
-  word-break:break-word; width:1020px; max-width:100%;
-}
+
 
 .why-header{ margin-bottom:6px; }
 .why-top{ display:flex; align-items:center; gap:12px; }
-.why-line{ width:28px; height:1px; background:#c4983a; position:relative; bottom:4px; flex-shrink:0; }
-.why-subtitle{
-  display:block; color:#7a1f2b; margin-top:-6px; margin-left:82px;
-  font-family:Georgia,'Times New Roman',serif;
-  letter-spacing:-0.5px; line-height:1.05; font-weight:400; font-size:50px;
-  word-break:break-word; width:1020px; max-width:100%;
-}
+
 
 .offer-icon{ width:56px; height:56px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px auto; }
 .offer-icon svg{ width:44px; height:44px; display:block; }
 
-.about-right1{ margin-top:0; color:#7a1b1b; font-size:14px; font-weight:500; letter-spacing:3px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; }
-.section-title3{ font-size:14px; font-weight:500; letter-spacing:3px; margin-bottom:20px; color:var(--accent); font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; }
-.section-title4{ font-size:14px; font-weight:500; letter-spacing:3px; margin-bottom:18px; color:var(--accent); font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; }
 
 .lp-culture{ padding:20px 20px 48px; background:linear-gradient(180deg,#fff,#fff); margin-top:-14px; }
 .culture-animated{
@@ -386,12 +349,50 @@ body{
 .why-grid .why-item:hover h3{ transform:translateY(-2px); transition:transform 160ms ease; }
 .why-grid .why-item:focus-visible{ outline:3px solid rgba(122,15,15,0.12); outline-offset:4px; }
 
+.lp-title {
+  display: block !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px !important; 
+  font-weight: 500; 
+  color: #7a1b1b; 
+  letter-spacing: 3px; 
+  text-transform: uppercase;
+  text-align: left !important;         
+  margin: 0 0 6px 10px !important;        
+  padding: 0 !important;
+}
 
+
+.lp-line {
+  display: block !important;
+  width: 28px !important;
+  height: 1px !important;
+  background: #c4983a !important;
+  margin: 8px 0 16px 50px !important;           
+  padding: 0 !important;
+  position: relative;
+  clear: both !important;
+}
+
+
+.lp-subtitle {
+  display: block !important;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 50px !important;         
+  font-weight: 400;
+  color: #7a1f2b;
+  letter-spacing: -0.5px;
+  line-height: 1.1 !important;         
+  word-break: break-word;
+  width: 100% !important;             
+  max-width: 600px !important;        
+  margin: 4px 0 25px 120px !important;    
+}
 /* ══════════════════════════════════════════════════════
    TABLET  601px – 900px
    (sidebar still visible, 2-col culture preserved)
 ══════════════════════════════════════════════════════ */
-@media (min-width: 601px) and (max-width: 900px) {
+@media (min-width: 601px) and (max-width: 1020px) {
   /* Header */
   .lp-header-inner{ padding:0 14px; }
   .lp-header .lp-logo{ width:70px; height:44px; }
@@ -414,23 +415,20 @@ body{
   .lp-about-inner{ flex-direction:column; align-items:center; gap:18px; padding:10px 4px; }
   .about-couple{ width:100%; max-width:480px; height:auto; }
   .about-right{ width:100%; padding:6px 0; }
-  .about-right p{ font-size:14px; }
-  .about-subtitle{
-  font-size:clamp(26px,4.5vw,40px);
-  margin-left:-28px;
-  width:100%;
-  white-space:normal;
-}
-.about-header{
+  
+/* .about-header{
   margin-bottom:6px;
   padding-left:24px;
   padding-right:16px;
+} */
+
+.about-header {
+   margin-top:0px !important;
 }
-  .about-right1{ font-size:12px; letter-spacing:2px; }
 
   /* Culture */
   .lp-culture{ padding:14px 16px 44px; margin-top:0; }
-  .culture-header{ margin-top:0; }
+  .culture-header{ margin-top:0px !important; }
   .culture-animated{ grid-template-columns:1fr; gap:14px; padding-bottom:50px; margin-top:12px; }
   .culture-slider{ height:300px; max-width:100%; }
   .slide{ height:300px; }
@@ -441,13 +439,9 @@ body{
   .info-slide.enter,.info-slide.exit{ transform:none; }
   .info-slide h3{ font-size:18px; }
   .info-slide p{ font-size:13px; }
-  .culture-subtitle{ font-size:clamp(26px,4.5vw,40px); margin-left:48px; }
-  .section-title3{ font-size:12px; letter-spacing:2px; }
-
+  
   /* Why */
   .lp-why{ padding:14px 16px; }
-  .why-subtitle{ font-size:clamp(26px,4.5vw,40px); margin-left:48px; }
-  .section-title4{ font-size:12px; letter-spacing:2px; }
   .why-item{ flex:0 1 calc(50% - 10px); }
   .why-item h3{ font-size:13px; }
   .why-item p{ font-size:13px; }
@@ -523,15 +517,9 @@ body{
   .about-couple{ width:100%; height:auto; max-width:100%; border-radius:12px; margin-bottom:34px;}
   .about-right{ width:100%; padding:4px 0; }
   .about-right p{ font-size:13px; }
-  .about-header{
-  margin-bottom:6px;
-  padding-left: -1px;
-  padding-right:12px;
-}
+  
   /* Keep the line visible but reduce margin so subtitle doesn't overflow */
   .about-top{ gap:10px; }
-  .about-right1 {
-    font-size:13px; letter-spacing:2px; margin-left: 18px !important; }
   
   /* Culture */
   .lp-culture{ padding:2px 12px 42px; margin-top:0; }
@@ -547,18 +535,11 @@ body{
   .info-slide h3{ font-size:clamp(14px,4vw,17px); margin-bottom:6px; }
   .info-slide p{ font-size:clamp(11px,3vw,13px); line-height:1.6; }
   .culture-top{ gap:10px; }
-  .culture-line{ width:30px; bottom:-2px; margin-left: 1px !important; }
-  .culture-subtitle{ font-size:clamp(20px,5.5vw,28px); margin-left:45px !important; margin-top:4px; }
-  .section-title3{ font-size:13px; letter-spacing:2px; margin-bottom:4px; margin-left: 12px !important;}
-
+  
   /* Why */
   .lp-why{ padding:2px 14px 12px; }
   .why-item{ flex:1 1 100%; }
   .why-top{ gap:8px; }
-  .why-line{ width:30px; bottom:-2px; margin-left: -1px !important; }
-  .why-subtitle{ font-size:clamp(20px,5.5vw,28px); margin-left: 48px !important; margin-top:4px; }
-  .section-title4{ font-size:13px; letter-spacing:2px; margin-bottom:4px; }
-  
   .why-item h3{ font-size:13px; }
   .why-item p{ font-size:12px; }
   .offer-icon{ width:42px; height:42px; }
@@ -693,7 +674,7 @@ body{
   .lp-logo2 img{ width:56px; height:56px; }
   .lp-hero .lp-hero-title{ font-size:clamp(16px,5vw,22px); }
   .hero-left-inner .lp-tag{ font-size:clamp(10px,2.8vw,13px); }
-  .about-subtitle,.culture-subtitle,.why-subtitle{ font-size:clamp(18px,5vw,22px); }
+  .lp-subtitle{ font-size:clamp(18px,5vw,22px); }
   .culture-slider{ height:180px; }
   .slide{ height:180px; }
   .info-slide h3{ font-size:13px; }
@@ -711,9 +692,7 @@ body{
 .contact_p1{
   font-size:10px;
 }
-.about-subtitle{
-    margin-left: 100px;
-  }
+
 
 .contact_p2{
   font-size:8px;
@@ -738,7 +717,7 @@ body{
 }
 
 /* Our Story alignment for iPad + Mac ── */
-@media (min-width: 768px) and (max-width: 1020px) {
+@media (min-width: 767px) and (max-width: 1023px) {
 
 .about-couple{
   width:100%;
@@ -746,75 +725,84 @@ body{
 }
 
 .about-right p {
-  padding-top: 18px;
+  padding-top: 30px;
+  padding-bottom: 10px;
 }
   .about-header{
-   padding-left: 1px ;
-    font-size: 18px;
+   padding-left: 10px ;
   }
-
-  .about-line{
-    margin-left:-4px !important ; width: 28px;
-  }
-
-  .about-right1 {
-    margin-left: 10px !important;
-  }
-
-  .about-subtitle{
-    margin-left: 60px !important; 
-  }
-
-  .culture-header {
-    margin-top: -35px;
-    padding-left: 12px ;
-  }
-  .culture-line{
-    margin-left:-4px !important; width: 28px;
-  }
-  .section-title3{
-    margin-left: 8px !important;
-  }
-
-  .culture-subtitle{
-    margin-left: 60px !important; 
-  }
-
-  .why-line {
-  margin-left: 5px !important;
-  width: 28px;
-}
-
-.section-title4{
-  margin-left: 12px !important;
-}
-  .why-top{
-  gap: 4px !important;
-}
-.why-subtitle {
-  margin-left: 70px !important;
-}
-
-}
-
-
-@media (min-width: 909px) and (max-width: 1000px){
  
-  .lp-about{
-    padding-left: 22px;
-    padding-right: 22px;
+  .culture-header {
+    margin-top: -10px !important;
+    padding-left: 10px !important;
+   
   }
-   .culture-header {
-    margin-top: 15px !important;
+  
+
+  .why-top {
+    padding-left: 10px !important;
   }
+
+  
+
+  .lp-title {
+    font-size: 13px !important; 
+    margin: 0 0 6px 10px !important;    
+    text-align: left !important;
   }
+
+  
+  .lp-line {
+    margin: 8px 0 14px 1px !important;  
+    width: 26px !important;
+  }
+
+ 
+  .lp-subtitle {
+    font-size: 36px !important;         
+    line-height: 1.15 !important;
+    max-width: 85% !important;           
+    margin: 4px 0 20px 65px !important;  
+  }
+
+}
+
 
 /* ── iPad Pro Fix ── */
-@media (min-width: 1020px) and (max-width: 1200px){
+@media (min-width: 1022px) and (max-width: 1300px){
  
   .lp-about{
     padding-left: 22px;
     padding-right: 22px;
+  }
+  .culture-header {
+    margin-top: 20px !important;
+    padding-left: 2px !important;
+  }
+
+  .lp-title {
+    font-size: 13px !important; 
+    margin: 0 0 6px 10px !important;    
+    text-align: left !important;
+  }
+
+  
+  .lp-line {
+    margin: 8px 0 14px 1px !important;  
+    width: 26px !important;
+  }
+
+ 
+  .lp-subtitle {
+    font-size: 36px !important;         
+    line-height: 1.15 !important;
+    max-width: 85% !important;           
+    margin: 4px 0 20px 65px !important;  
+  }
+  
+
+  .why-top {
+    padding-left: 2px !important;
   }
 
  
@@ -822,17 +810,6 @@ body{
     width: 100%;
     max-width: 470px;
     height: auto;
-  }
-
-  .about-line {
-    margin-left: -24px !important;
-  }
-  .about-right1{
-    margin-left: 10px !important;
-  }
-
-  .about-subtitle {
-    margin-left: 45px !important;
   }
   
   .culture-animated{
@@ -893,58 +870,9 @@ body{
     margin-bottom: 14px;
   }
 
-  .culture-subtitle, .why-subtitle {
-    margin-left: 66px !important;
-  }
-  .section-title3{
-    margin-left: 9px !important;
-  }
-
-
-  .section-title4{
-  margin-left: 12px !important;
-}
-  .why-top{
-  gap: 4px !important;
-}
-  
-
 
 }
 
-@media (min-width: 1512px) {
-  .about-line {
-    margin-left: -2px !important;
-  }
-
-  .about-right1 {
-    margin-left: 10px !important;
-  }
-  .about-subtitle {
-    margin-left: 70px !important;
-  }
-  .why-subtitle {
-    margin-left: 70px !important;
-  }
-
-  .culture-subtitle {
-     margin-left: 70px !important;
-  }
-
-  .why-line {
-    margin-left: -2px !important;
-  }
-  .section-title3 {
-     margin-left: 10px !important;
-  }
-
-  .section-title4{
-  margin-left: 10px !important;
-}
-  .why-top{
-  gap: 4px !important;
-}
-}
 
 @media (min-width: 1512px){
 
@@ -954,6 +882,17 @@ body{
   .culture-header{
     max-width: 1380px;
   }
+.culture-header {
+  margin-left: -8px !important;
+}
+.why-top {
+  margin-left: -8px !important;
+}
+
+.about-header {
+  margin-left: 5px !important;
+}
+  
 
   .lp-about{
     padding-bottom: 80px;
@@ -994,62 +933,83 @@ body{
   }
 }
 
-@media (min-width: 1300px) and (max-width: 1441px)  {
-  .about-line {
-    margin-left: -2px !important;
-  }
 
-  .about-right1 {
-    margin-left: 10px !important;
-  }
-  .about-subtitle {
-    margin-left: 70px !important;
-  }
-  .why-subtitle {
-    margin-left: 70px !important;
-  }
+/* SMALL MOBILE VIEW (Screens under 400px) */
 
-  .culture-subtitle {
-    margin-left: 70px !important;
-  }
-  .section-title3{
-  margin-left: 10px !important;
-}
+@media screen and (max-width: 399px) {
 
-  .why-line {
-    margin-left: -2px !important;
-  }
   
-  .section-title4{
-  margin-left: 10px !important;
-}
-  .why-top{
-  gap: 4px !important;
-}
-}
-
-@media (max-width: 430px) {
-  .about-line {
-    margin-left: -22px !important; width:30px;
+  .lp-title {
+    font-size: 11px !important;        
+    letter-spacing: 2px !important;     
+    margin: 0 0 4px 5px !important;     
+    text-align: left !important;
   }
 
-.about-subtitle {
-  font-size:clamp(20px,5.5vw,28px); margin-left:45px !important; 
+  
+  .lp-line {
+    width: 22px !important;             
+    margin: 6px 0 10px -18px !important; 
+  }
+
+  
+  .lp-subtitle {
+    font-size: 26px !important;         
+    line-height: 1.2 !important;        
+    max-width: 100% !important;         
+    margin: 4px 0 15px 40px !important; 
+    text-align: left !important;
+  }
+
+  .culture-header {
+    padding-left: 24px !important;
+  }
+
+  .why-top {
+    padding-left: 24px !important;
+  }
 }
 
-.culture-subtitle {
-  margin-left: 70px !important;
-}
-.about-right1 {
-    font-size:13px; letter-spacing:2px; margin-left: 12px !important; }
 
-.section-title4{ font-size:13px; letter-spacing:2px; margin-bottom:4px; margin-left: 18px !important;}
+/*   LARGE MOBILE VIEW (Standard & Large Phones: 400px to 767px) */
 
-.why-subtitle {
-  margin-left: 68px !important;
+@media screen and (min-width: 400px) and (max-width: 767px) {
+
+  
+  .lp-title {
+    font-size: 12px !important; 
+    letter-spacing: 2.5px !important;
+    margin: 0 0 5px 8px !important;      
+    text-align: left !important;
+  }
+
+  
+  .lp-line {
+    width: 24px !important;
+    margin: 8px 0 12px -10px !important;  
+  }
+
+  
+  .lp-subtitle {
+    font-size: 30px !important;          
+    line-height: 1.15 !important;
+    max-width: 90% !important;           
+    margin: 4px 0 18px 55px !important; 
+    text-align: left !important;
+  }
+
+  .culture-header {
+    padding-left: 24px !important;
+  }
+
+  .why-top {
+    padding-left: 24px !important;
+  }
 }
 
-.why-top {
-  gap: 4px !important;
-}
-}
+
+
+
+
+
+

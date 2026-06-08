@@ -153,6 +153,8 @@
   color:var(--accent) ;
   
 }
+
+.error5 { color: var(--error); text-align:left; margin-top:10px; font-size:14px; }
 /* the actual content card  */
 .page5 {
   padding: 20px;

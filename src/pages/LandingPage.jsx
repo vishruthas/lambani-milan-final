@@ -324,11 +324,11 @@ export default function LandingPage() {
         <section className="lp-about" id="about" ref={aboutRef}>
           <div className="about-header">
   <div className="about-top">
-    <div className="about-line"></div>
-    <h2 className="about-right1">OUR STORY</h2>
+    <div className="lp-line"></div>
+    <h2 className="lp-title">OUR STORY</h2>
   </div>
 
-  <span className="about-subtitle">
+  <span className="lp-subtitle">
     Rooted In Heritage, <br />
     Built For Tomorrow.
     
@@ -354,10 +354,10 @@ export default function LandingPage() {
         <section className="lp-culture" ref={cultureRef} id="culture">
           <div className="culture-header">
           <div className="culture-top">
-          <div className="culture-line"></div>
-          <h2 className="section-title3">OUR CULTURE & HERITAGE</h2>
+          <div className="lp-line"></div>
+          <h2 className="lp-title">OUR CULTURE & HERITAGE</h2>
           </div>
-          <span className="culture-subtitle">
+          <span className="lp-subtitle">
             Discover Traditions & <br />
             Spirit Of Lambani Life.
           </span>
@@ -438,10 +438,10 @@ export default function LandingPage() {
         <section className="lp-why">
           <div className="why-header">
           <div className="why-top">
-          <div className="why-line"></div>
-          <h2 className="section-title4">WHAT WE OFFER</h2>
+          <div className="lp-line"></div>
+          <h2 className="lp-title">WHAT WE OFFER</h2>
           </div>
-          <span className="why-subtitle">
+          <span className="lp-subtitle">
           The Lambani Milan <br />
           Difference. 
                  

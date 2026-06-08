@@ -7,7 +7,7 @@ export default function AppTabs() {
   const scheme = useColorScheme();
   const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
 
-  return (
+  /* return (
     <NativeTabs
       backgroundColor={colors.background}
       indicatorColor={colors.backgroundElement}
@@ -29,4 +29,15 @@ export default function AppTabs() {
       </NativeTabs.Trigger>
     </NativeTabs>
   );
+} */
+
+return (
+  <NativeTabs
+    backgroundColor={colors.background}
+    indicatorColor={colors.backgroundElement}
+    labelStyle={{ selected: { color: colors.text } }}>
+    {/* Home and Explore tabs have been completely removed from here */}
+  </NativeTabs>
+);
 }
+

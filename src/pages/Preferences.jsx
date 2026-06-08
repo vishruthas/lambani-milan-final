@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import { savePreferences } from "../services/api";
+import { savePreferences, getMyProfile } from "../services/api";
 import "./Preferences.css";
 import districtsData from "../data/districts.json";
 
@@ -90,6 +90,8 @@ export default function Preferences() {
   const [showGothra, setShowGothra] = useState(false);
   const [gothraPlaceholder, setGothraPlaceholder] = useState("Select Gothra");
   const [districtPlaceholder, setDistrictPlaceholder] = useState("Select District");
+ 
+  const [gender, setGender] = useState("");
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -111,6 +113,21 @@ export default function Preferences() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  /* FETCH GENDER */
+
+  useEffect(() => {
+  const fetchProfile = async () => {
+    try {
+      const profile = await getMyProfile();
+      setGender(profile.gender || "");
+    } catch (err) {
+      console.error("Failed to fetch profile", err);
+    }
+  };
+
+  fetchProfile();
+}, []);
 
   /* ---------- Location handlers ---------- */
 
@@ -287,9 +304,21 @@ export default function Preferences() {
   const submit = async () => {
     try {
       setLoading(true); setError(""); setAgeError("");
+     const minimumAllowedAge = gender?.toLowerCase() === "male" ? 18 : 21;
+
+      if (minAge && Number(minAge) < minimumAllowedAge) {
+        setAgeError(
+        `Minimum age should be ${minimumAllowedAge} or above`
+      );
+      setLoading(false);
+      return;
+    }
+
       if (minAge && maxAge && Number(minAge) >= Number(maxAge)) {
-        setAgeError("Minimum age should be less than maximum age."); setLoading(false); return;
-      }
+        setAgeError("Minimum age should be less than maximum age.");
+        setLoading(false);
+        return;
+    }
       if (kuls.length > 0 && !kuls.includes(DOESNT)) {
         if (Object.keys(selectedGothras).length === 0) {
           setError("Please select at least one Gothra for the chosen Kul(s)."); setLoading(false); return;
@@ -336,8 +365,10 @@ export default function Preferences() {
   const isFormValid =
   minAge &&
   maxAge &&
-  Number(minAge) >= 18 &&
-  Number(maxAge) >= 19 &&
+  Number(minAge) >=
+  (gender?.toLowerCase() === "male" ? 18 : 21) &&
+  Number(maxAge) >
+  (gender?.toLowerCase() === "male" ? 18 : 21) &&
   Number(minAge) < Number(maxAge) &&
   Object.keys(locations).length > 0 &&
   (
@@ -376,7 +407,6 @@ export default function Preferences() {
                 value={maxAge}
                 onChange={(e) => setMaxAge(e.target.value)}
               />
-              
             </div>
             
             {/* ── Locations ── */}
@@ -724,10 +754,14 @@ export default function Preferences() {
           >
             {loading ? "Saving..." : "Save & Continue"}
             </button>
-            {minAge && Number(minAge) < 18 && (
+            {minAge &&
+ Number(minAge) <
+   (gender?.toLowerCase() === "male" ? 18 : 21) && (
   <div className="prefs-error">
-    Minimum age should be greater than or equal to 18
+    Minimum age should be greater than or equal to{" "}
+    {gender?.toLowerCase() === "male" ? 18 : 21}
   </div>
+
 )}
 
 {maxAge && Number(maxAge) < 19 && (
