@@ -90,6 +90,7 @@ export default function Preferences() {
   const [showGothra, setShowGothra] = useState(false);
   const [gothraPlaceholder, setGothraPlaceholder] = useState("Select Gothra");
   const [districtPlaceholder, setDistrictPlaceholder] = useState("Select District");
+  const [districtDoesntMatter, setDistrictDoesntMatter] = useState(false);
  
   const [gender, setGender] = useState("");
 
@@ -304,7 +305,7 @@ export default function Preferences() {
   const submit = async () => {
     try {
       setLoading(true); setError(""); setAgeError("");
-     const minimumAllowedAge = gender?.toLowerCase() === "male" ? 18 : 21;
+     const minimumAllowedAge = gender?.toLowerCase() === "Male" ? 18 : 21;
 
       if (minAge && Number(minAge) < minimumAllowedAge) {
         setAgeError(
@@ -366,9 +367,9 @@ export default function Preferences() {
   minAge &&
   maxAge &&
   Number(minAge) >=
-  (gender?.toLowerCase() === "male" ? 18 : 21) &&
+  (gender?.toLowerCase() === "Male" ? 18 : 21) &&
   Number(maxAge) >
-  (gender?.toLowerCase() === "male" ? 18 : 21) &&
+  (gender?.toLowerCase() === "Male" ? 18 : 21) &&
   Number(minAge) < Number(maxAge) &&
   Object.keys(locations).length > 0 &&
   (
@@ -450,7 +451,10 @@ export default function Preferences() {
                       <label className="select-all-wrap">
                         <input
                           type="checkbox"
-                          checked={selectedDistricts.length === 0}
+                          checked={
+                            Object.prototype.hasOwnProperty.call(locations, state) &&
+                            locations[state].length === 0
+                          }
                           onChange={() => handleDistrictToggle("DOESNT_MATTER")}
                         />
                         <span className="gothra-label-text">Doesn't Matter</span>
@@ -590,8 +594,8 @@ export default function Preferences() {
                           <input
                             type="checkbox"
                             checked={
-                              (tempGothras[selectedKul] && tempGothras[selectedKul].length === 0) ||
-                              (!tempGothras[selectedKul] && (!selectedGothras[selectedKul] || selectedGothras[selectedKul].length === 0))
+                              Object.prototype.hasOwnProperty.call(selectedGothras, selectedKul) &&
+                              selectedGothras[selectedKul].length === 0
                             }
                             onChange={() => {
   setSelectedGothras(prev => ({
@@ -756,17 +760,17 @@ export default function Preferences() {
             </button>
             {minAge &&
  Number(minAge) <
-   (gender?.toLowerCase() === "male" ? 18 : 21) && (
+   (gender?.toLowerCase() === "Male" ? 18 : 21) && (
   <div className="prefs-error">
     Minimum age should be greater than or equal to{" "}
-    {gender?.toLowerCase() === "male" ? 18 : 21}
+    {gender?.toLowerCase() === "Male" ? 18 : 21}
   </div>
 
 )}
 
-{maxAge && Number(maxAge) < 19 && (
+{maxAge && Number(maxAge) < 18 && (
   <div className="prefs-error">
-    Maximum age should be greater than or equal to 19
+    Maximum age should be greater than or equal to 18
   </div>
 )}
 

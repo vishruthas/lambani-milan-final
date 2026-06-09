@@ -9,6 +9,7 @@ import {
 } from "../services/api";
 import "./ManagePhotos.css";
 import logo from "../assets/logo2.webp";
+import { heicTo } from "heic-to";
 
 export default function ManagePhotos() {
   const [searchParams] = useSearchParams();
@@ -146,19 +147,73 @@ export default function ManagePhotos() {
     }
   }
 
-  async function handleFileSelect(e) {
-    const files = Array.from(e.target.files);
-
+  /* HANDLE FILE SELECT */
+    async function handleFileSelect(e) {
+    const files = Array.from(e.target.files || []);
     if (!files.length) return;
 
-    const previews = files.map((file) => {
-      const preview = URL.createObjectURL(file);
-      return { file, preview };
-    });
+    setLoading(true);
+    setWarning("");
+    const processedFiles = [];
+    const previews = [];
 
-    setNewFiles((prev) => [...prev, ...files]);
-    setPhotos((prev) => [...prev, ...previews.map((p) => p.preview)]);
+    try {
+      for (let file of files) {
+        const ext = file.name.split(".").pop()?.toLowerCase();
+        console.log("Processing File:", file.name, "Type:", file.type);
+
+        const isHeic = ext === "heic" || ext === "heif" || file.type === "image/heic";
+
+        if (isHeic) {
+          try {
+            const convertedBlob = await heicTo({
+              blob: file,
+              type: "image/jpeg",
+              quality: 0.9,
+            });
+
+            console.log("HEIC CONV RESULT:", convertedBlob);
+
+            const newFileName = file.name.replace(/\.(heic|heif)$/i, "") + ".jpg";
+            const convertedFile = new File([convertedBlob], newFileName, {
+              type: "image/jpeg",
+            });
+
+            processedFiles.push(convertedFile);
+            previews.push(URL.createObjectURL(convertedFile));
+          } catch (err) {
+            console.warn(`HEIC processing bypassed for ${file.name}:`, err?.message);
+
+            if (err?.message?.includes("ftyp") || err?.message?.includes("readable")) {
+              console.log("File structural check bypassed. Appending original file stream.");
+              processedFiles.push(file);
+              previews.push(URL.createObjectURL(file));
+            } else {
+              console.error("Critical conversion error:", err);
+              setWarning(`Skipped unreadable file: ${file.name}`);
+            }
+          }
+        } else {
+          // Standard web extensions (JPG, JPEG, PNG, WEBP)
+          processedFiles.push(file);
+          previews.push(URL.createObjectURL(file));
+        }
+      }
+
+      setNewFiles((prev) => [...prev, ...processedFiles]);
+      setPhotos((prev) => [...prev, ...previews]);
+    } catch (globalErr) {
+      console.error("Global file processing failed:", globalErr);
+      setWarning("Failed to process one or more images.");
+    } finally {
+      setLoading(false);
+      e.target.value = "";
+    }
   }
+
+
+  /* DELETE */
+
 
   async function handleDelete(photoUrl) {
     if (photoUrl === photos[0]) {

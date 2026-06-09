@@ -367,7 +367,7 @@ const addLocation = () => {
 
   async function savePreferencesData() {
     const minimumAllowedAge =
-  gender?.toLowerCase() === "male" ? 18 : 21;
+  gender?.toLowerCase() === "Male" ? 18 : 21;
 
 if (
   prefData.minAge &&
@@ -511,10 +511,10 @@ const isAgeValid =
             />
             {prefData.minAge &&
             Number(prefData.minAge) <
-              (gender?.toLowerCase() === "male" ? 18 : 21) && (
+              (gender?.toLowerCase() === "Male" ? 18 : 21) && (
           <div className="error5">
             Minimum age should be at least{" "}
-            {gender?.toLowerCase() === "male" ? 18 : 21}
+            {gender?.toLowerCase() === "Male" ? 18 : 21}
           </div>
         )}
           </div>
@@ -664,11 +664,13 @@ const isAgeValid =
                         <label className="dropdown-item5">
                           <input
                             type="checkbox"
-                            checked={(
-                              tempGothras[selectedKul] ??
-                              selectedGothras[selectedKul] ??
-                              []
-                            ).length === 0}
+                            checked={
+                              Object.prototype.hasOwnProperty.call(
+                              selectedGothras,
+                              selectedKul
+                              ) &&
+                            (selectedGothras[selectedKul] || []).length === 0
+                          }
                             onChange={() => {
   setTempGothras(prev => ({
     ...prev,
@@ -935,7 +937,10 @@ setGothraPlaceholder("Select Gothra");
                         <label className="dropdown-item5">
                           <input
                             type="checkbox"
-                            checked={(tempDistricts[state] || []).length === 0}
+                            checked={
+                              Object.prototype.hasOwnProperty.call(prefData.locations || {}, state) &&
+                              (prefData.locations[state] || []).length === 0
+                            }
                             onChange={() => {
   setTempDistricts(prev => ({
     ...prev,

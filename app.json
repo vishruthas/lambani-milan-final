@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "f28ac83d-f8fe-4dc6-a3d8-d1ebeba3666e"
+      }
+    },
+    "android": {
+      "package": "com.lambanimilan.app"
+    }
+  }
+}

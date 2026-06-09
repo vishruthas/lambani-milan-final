@@ -1,9 +1,0 @@
-node_modules/
-.expo/
-.gradle/
-android/build/
-android/app/build/
-android/.cxx/
-android/app/.cxx/
-package-lock.json
-yarn.lock

@@ -4,7 +4,7 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import Animated, { Easing, Keyframe } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 
-const INITIAL_SCALE_FACTOR = Dimensions.get('screen').height / 90;
+const INITIAL_SCALE_FACTOR = Dimensions.get('screen').height / 60;
 const DURATION = 600;
 
 export function AnimatedSplashOverlay() {
@@ -108,15 +108,16 @@ const styles = StyleSheet.create({
   iconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 128,
-    height: 128,
+    width: 220,
+    height: 220,
     zIndex: 100,
   },
   image: {
     position: 'absolute',
-    width: 76,
-    height: 71,
+    width: 160,
+    height: 160,
   },
+  
   background: {
     borderRadius: 40,
     experimental_backgroundImage: `linear-gradient(180deg, #3C9FFE, #0274DF)`,

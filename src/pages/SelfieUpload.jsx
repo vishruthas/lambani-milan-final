@@ -79,7 +79,11 @@ export default function SelfieUpload() {
     canvas.height = video.videoHeight;
 
     const ctx = canvas.getContext("2d");
-    ctx.drawImage(video, 0, 0);
+    ctx.translate(canvas.width, 0);
+    ctx.scale(-1, 1);
+    
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+   
 
     canvas.toBlob(blob => {
       if (!blob || blob.size === 0) {
